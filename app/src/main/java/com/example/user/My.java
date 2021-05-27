@@ -1,17 +1,31 @@
 package com.example.user;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.io.File;
 
 public class My extends AppCompatActivity {
     private Toolbar toolbar;
@@ -22,7 +36,7 @@ public class My extends AppCompatActivity {
         setContentView(R.layout.activity_my);
 
         // toolbar setting
-        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
 
@@ -39,17 +53,17 @@ public class My extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.page_home:
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(0, 0);
                         return true;
 
                     case R.id.page_search:
                         startActivity(new Intent(getApplicationContext(), Search.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(0, 0);
                         return true;
 
                     case R.id.page_order:
                         startActivity(new Intent(getApplicationContext(), Order.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(0, 0);
                         return true;
 
                     case R.id.page_my:
@@ -59,6 +73,7 @@ public class My extends AppCompatActivity {
             }
         });
     }
+
 
     public boolean onCreateOptionsMenu(Menu menu) {
 
