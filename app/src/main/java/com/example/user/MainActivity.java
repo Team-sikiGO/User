@@ -26,8 +26,9 @@ import com.example.user.Search;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
-    private BottomNavigationView mBottomNV;
     private Toolbar toolbar;
+    protected BottomNavigationView bottomNavigationView;
+    private long backBtnTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         gv.setAdapter(gAdapter);
 
         //Initialize And Assign Variable
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
+        bottomNavigationView = findViewById(R.id.bottom_nav);
 
         //Set Home Selected
         bottomNavigationView.setSelectedItemId(R.id.page_home);
@@ -53,28 +54,69 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
+                int itemId = item.getItemId();
+                switch (itemId) {
                     case R.id.page_home:
                         return true;
 
                     case R.id.page_search:
                         startActivity(new Intent(getApplicationContext(), Search.class));
-                        overridePendingTransition(0, 0);
+                        overridePendingTransition(R.anim.horizon_enter, R.anim.none);
+                        finish();
                         return true;
 
                     case R.id.page_order:
                         startActivity(new Intent(getApplicationContext(), Order.class));
-                        overridePendingTransition(0, 0);
+                        overridePendingTransition(R.anim.horizon_enter, R.anim.none);
+                        finish();
                         return true;
 
                     case R.id.page_my:
                         startActivity(new Intent(getApplicationContext(), My.class));
-                        overridePendingTransition(0, 0);
+                        overridePendingTransition(R.anim.horizon_enter, R.anim.none);
+                        finish();
                         return true;
                 }
-                return false;
+                return true;
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        overridePendingTransition(R.anim.horizon_enter, R.anim.none);
+        updateNavigationBarState();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        overridePendingTransition(R.anim.none, R.anim.horizon_exit);
+    }
+
+    private void updateNavigationBarState(){
+        int actionId = R.id.page_home;
+        selectBottomNavigationBarItem(actionId);
+    }
+
+    void selectBottomNavigationBarItem(int itemId) {
+        MenuItem item = bottomNavigationView.getMenu().findItem(itemId);
+        item.setChecked(true);
+    }
+
+    @Override
+    public void onBackPressed() {
+        long curTime = System.currentTimeMillis();
+        long gapTime = curTime - backBtnTime;
+
+        if(0 <= gapTime && 2000 >= gapTime) {
+            super.onBackPressed();
+        }
+        else {
+            backBtnTime = curTime;
+            Toast.makeText(this, "한번 더 누르면 종료됩니다.",Toast.LENGTH_SHORT).show();
+        }
     }
 
     public class MyGridAdapter extends BaseAdapter {
@@ -100,8 +142,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // 이미지 파일을 배열로 초기화
-        Integer[] posterID = {R.drawable.bunsik, R.drawable.korea, R.drawable.china, R.drawable.japan, R.drawable.italy, R.drawable.cafe
-                , R.drawable.chicken, R.drawable.pizza, R.drawable.jokbo, R.drawable.yasik};
+        Integer[] posterID = {R.drawable.bunsik2, R.drawable.korea2, R.drawable.china2, R.drawable.japan2, R.drawable.italy2, R.drawable.cafe2
+                , R.drawable.chicken2, R.drawable.pizza2, R.drawable.jokbo2, R.drawable.yasik2};
 
         // 카테고리를 문자 배열로 초기화
         String[] posterTitle = {"분식", "한식", "중식", "일식", "양식", "카페", "치킨", "피자", "족발/보쌈", "야식"};

@@ -5,16 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/grey">
 
     <include  layout="@layout/toolbar_main"/>
-
 
     <GridView android:id="@+id/gridView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:numColumns="2">
+        android:numColumns="2"
+        android:layout_marginTop="60dp">
     </GridView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -26,5 +27,4 @@
         app:itemIconTint="@drawable/selector"
         app:menu="@menu/bottom_navigation_menu"
         android:layout_alignParentBottom="true"/>
-
 </RelativeLayout>

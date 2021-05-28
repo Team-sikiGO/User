@@ -15,6 +15,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Order extends AppCompatActivity {
     private Toolbar toolbar;
+    BottomNavigationView bottomNavigationView;
+    private long backBtnTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +29,7 @@ public class Order extends AppCompatActivity {
         getSupportActionBar().setTitle("");
 
         //Initialize And Assign Variable
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
+        bottomNavigationView = findViewById(R.id.bottom_nav);
 
         //Set Home Selected
         bottomNavigationView.setSelectedItemId(R.id.page_order);
@@ -39,12 +41,14 @@ public class Order extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.page_home:
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(R.anim.horizon_enter, R.anim.none);
+                        finish();
                         return true;
 
                     case R.id.page_search:
                         startActivity(new Intent(getApplicationContext(), Search.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(R.anim.horizon_enter, R.anim.none);
+                        finish();
                         return true;
 
                     case R.id.page_order:
@@ -52,12 +56,50 @@ public class Order extends AppCompatActivity {
 
                     case R.id.page_my:
                         startActivity(new Intent(getApplicationContext(), My.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(R.anim.horizon_enter, R.anim.none);
+                        finish();
                         return true;
                 }
-                return false;
+                return true;
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        overridePendingTransition(R.anim.horizon_enter, R.anim.none);
+        updateNavigationBarState();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        overridePendingTransition(R.anim.none, R.anim.horizon_exit);
+    }
+
+    private void updateNavigationBarState(){
+        int actionId = R.id.page_order;
+        selectBottomNavigationBarItem(actionId);
+    }
+
+    void selectBottomNavigationBarItem(int itemId) {
+        MenuItem item = bottomNavigationView.getMenu().findItem(itemId);
+        item.setChecked(true);
+    }
+
+    @Override
+    public void onBackPressed() {
+        long curTime = System.currentTimeMillis();
+        long gapTime = curTime - backBtnTime;
+
+        if(0 <= gapTime && 2000 >= gapTime) {
+            super.onBackPressed();
+        }
+        else {
+            backBtnTime = curTime;
+            Toast.makeText(this, "한번 더 누르면 종료됩니다.",Toast.LENGTH_SHORT).show();
+        }
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
