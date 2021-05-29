@@ -151,9 +151,9 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) { // 각 그리드뷰의 칸마다 이미지뷰를 생성해서 보여주게 함
             ImageView imageView = new ImageView(context);
-            imageView.setLayoutParams(new GridView.LayoutParams(200, 300));
+            imageView.setLayoutParams(new GridView.LayoutParams(350, 350));
             imageView.setScaleType(ImageView.ScaleType.FIT_CENTER); // 그리드뷰 칸의 중앙에 배치
-            imageView.setPadding(5, 5, 5, 5);
+            imageView.setPadding(2, 2, 2, 2);
 
             imageView.setImageResource(posterID[position]); // R.drawable.mov0x 이미지를 로드하여 출력
             //TODO 이미지를 클릭했을 때, 원래 이미지 크기가 보이도록 함
