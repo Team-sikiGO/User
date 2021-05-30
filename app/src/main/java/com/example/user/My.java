@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -81,7 +82,7 @@ public class My extends AppCompatActivity {
             }
         });
         imageView_profile = (ImageView) findViewById(R.id.profile);
-        TextView textView_name  = (TextView) findViewById(R.id.name);
+//        EditText editText_nickname  = (EditText) findViewById(R.id.nickname);
         TextView textView_notice = (TextView) findViewById(R.id.notice);
         TextView textView_manage_account = (TextView) findViewById(R.id.manage_account);
         TextView textView_order_detail = (TextView) findViewById(R.id.order_detail);
@@ -100,9 +101,10 @@ public class My extends AppCompatActivity {
 //                        Toast.makeText(getApplicationContext(), "profile click", Toast.LENGTH_SHORT).show();
                         break;
 
-                    case R.id.name:
-                        Toast.makeText(getApplicationContext(), "name click", Toast.LENGTH_SHORT).show();
-                        break;
+//                    case R.id.nickname:
+//                        editText_nickname.setText(editText_nickname.getText());
+//                        Toast.makeText(getApplicationContext(), "nickname click", Toast.LENGTH_SHORT).show();
+//                        break;
 
 
                     case R.id.notice:
@@ -129,12 +131,18 @@ public class My extends AppCompatActivity {
         };
 
         imageView_profile.setOnClickListener(clickListener);
-        textView_name.setOnClickListener(clickListener);
+//        editText_nickname.setOnClickListener(clickListener);
         textView_notice.setOnClickListener(clickListener);
         textView_manage_account.setOnClickListener(clickListener);
         textView_order_detail.setOnClickListener(clickListener);
         textView_cs.setOnClickListener(clickListener);
         textView_policy.setOnClickListener(clickListener);
+    }
+
+    public void nickname_btn(View view) {
+        EditText editText = (EditText) findViewById(R.id.nickname);
+        Toast.makeText(My.this, editText.getText().toString(), Toast.LENGTH_SHORT).show();
+        editText.setText(editText.getText());
     }
 
     @Override

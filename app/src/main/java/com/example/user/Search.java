@@ -5,6 +5,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -121,5 +125,10 @@ public class Search extends AppCompatActivity {
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void search_btn(View view) {
+        EditText editText = (EditText) findViewById(R.id.search_text);
+        Toast.makeText(Search.this, editText.getText().toString(), Toast.LENGTH_SHORT).show();
     }
 }
