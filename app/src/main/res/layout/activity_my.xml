@@ -23,47 +23,15 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:scaleType="fitCenter"
-                android:src="@drawable/my2" />
-
-            <!--            <LinearLayout-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="match_parent"-->
-            <!--                android:orientation="horizontal"-->
-            <!--                android:layout_weight="1">-->
-
-            <!--                <EditText-->
-            <!--                    android:id="@+id/nickname"-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="50dp"-->
-            <!--                    android:layout_centerInParent="true"-->
-            <!--                    android:layout_weight="0.6"-->
-            <!--                    android:gravity="center|left"-->
-            <!--                    android:layout_gravity="center"-->
-            <!--                    android:textSize="15sp"-->
-            <!--                    android:textStyle="bold"-->
-            <!--                    android:layout_marginLeft="30dp"-->
-            <!--                    android:textColor="@color/black"-->
-            <!--                    android:background="@color/white"-->
-            <!--                    android:hint="닉네임 입력">-->
-            <!--                </EditText>-->
-
-            <!--                <ImageButton-->
-            <!--                    android:id="@+id/editor"-->
-            <!--                    android:layout_width="100dp"-->
-            <!--                    android:layout_height="30dp"-->
-            <!--                    android:layout_weight="1"-->
-            <!--                    android:background="@drawable/pencil"-->
-            <!--                    android:layout_gravity="center"-->
-            <!--                    android:onClick="nickname_btn">-->
-            <!--                </ImageButton>-->
-            <!--            </LinearLayout>-->
+                android:src="@drawable/my2"
+                app:civ_border_width="2dp"
+                app:civ_border_color="@color/black"/>
 
             <TextView
                 android:id="@+id/name"
@@ -82,7 +50,9 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="5dp"
-            android:background="@color/orange"></ImageView>
+            android:background="@color/orange"
+            android:layout_marginTop="20dp">
+        </ImageView>
 
         <ScrollView
             android:layout_width="match_parent"

@@ -28,10 +28,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.File;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class My extends AppCompatActivity {
     private Toolbar toolbar;
     private final int GET_GALLERY_IMAGE = 200;
-    private  ImageView imageView_profile;
+    private CircleImageView imageView_profile;
     BottomNavigationView bottomNavigationView;
     private long backBtnTime = 0;
 
@@ -80,7 +82,7 @@ public class My extends AppCompatActivity {
                 return true;
             }
         });
-        imageView_profile = (ImageView) findViewById(R.id.profile);
+        imageView_profile = (CircleImageView) findViewById(R.id.profile);
         TextView textView_name  = (TextView) findViewById(R.id.name);
         TextView textView_notice = (TextView) findViewById(R.id.notice);
         TextView textView_manage_account = (TextView) findViewById(R.id.manage_account);
