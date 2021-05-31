@@ -84,6 +84,7 @@ public class My extends AppCompatActivity {
         });
         imageView_profile = (CircleImageView) findViewById(R.id.profile);
         TextView textView_name  = (TextView) findViewById(R.id.name);
+        TextView textView_logout = (TextView) findViewById(R.id.account_logout);
         TextView textView_notice = (TextView) findViewById(R.id.notice);
         TextView textView_manage_account = (TextView) findViewById(R.id.manage_account);
         TextView textView_order_detail = (TextView) findViewById(R.id.order_detail);
@@ -106,6 +107,9 @@ public class My extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "name click", Toast.LENGTH_SHORT).show();
                         break;
 
+                    case R.id.account_logout:
+                        Toast.makeText(getApplicationContext(), "logout click", Toast.LENGTH_SHORT).show();
+                        break;
 
                     case R.id.notice:
                         Toast.makeText(getApplicationContext(), "noitce click", Toast.LENGTH_SHORT).show();
@@ -132,6 +136,7 @@ public class My extends AppCompatActivity {
 
         imageView_profile.setOnClickListener(clickListener);
         textView_name.setOnClickListener(clickListener);
+        textView_logout.setOnClickListener(clickListener);
         textView_notice.setOnClickListener(clickListener);
         textView_manage_account.setOnClickListener(clickListener);
         textView_order_detail.setOnClickListener(clickListener);

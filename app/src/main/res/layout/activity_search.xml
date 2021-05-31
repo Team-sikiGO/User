@@ -26,7 +26,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="0.1"
-                android:hint="검색어를 입력하시오.">
+                android:hint="검색어를 입력하시오."
+                android:backgroundTint="@color/black">
             </EditText>
 
             <Button
@@ -46,7 +47,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_weight="0.15">
+            android:layout_weight="0.15"
+            android:background="@color/grey">
         </LinearLayout>
 
     </LinearLayout>
