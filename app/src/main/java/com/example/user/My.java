@@ -83,7 +83,7 @@ public class My extends AppCompatActivity {
             }
         });
         imageView_profile = (CircleImageView) findViewById(R.id.profile);
-        TextView textView_name  = (TextView) findViewById(R.id.name);
+        TextView textView_name = (TextView) findViewById(R.id.name);
         TextView textView_logout = (TextView) findViewById(R.id.account_logout);
         TextView textView_notice = (TextView) findViewById(R.id.notice);
         TextView textView_manage_account = (TextView) findViewById(R.id.manage_account);
@@ -157,7 +157,7 @@ public class My extends AppCompatActivity {
         overridePendingTransition(R.anim.none, R.anim.horizon_exit);
     }
 
-    private void updateNavigationBarState(){
+    private void updateNavigationBarState() {
         int actionId = R.id.page_my;
         selectBottomNavigationBarItem(actionId);
     }
@@ -172,12 +172,11 @@ public class My extends AppCompatActivity {
         long curTime = System.currentTimeMillis();
         long gapTime = curTime - backBtnTime;
 
-        if(0 <= gapTime && 2000 >= gapTime) {
+        if (0 <= gapTime && 2000 >= gapTime) {
             super.onBackPressed();
-        }
-        else {
+        } else {
             backBtnTime = curTime;
-            Toast.makeText(this, "한번 더 누르면 종료됩니다.",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
         }
     }
 

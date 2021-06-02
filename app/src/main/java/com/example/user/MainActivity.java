@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.none, R.anim.horizon_exit);
     }
 
-    private void updateNavigationBarState(){
+    private void updateNavigationBarState() {
         int actionId = R.id.page_home;
         selectBottomNavigationBarItem(actionId);
     }
@@ -110,12 +110,11 @@ public class MainActivity extends AppCompatActivity {
         long curTime = System.currentTimeMillis();
         long gapTime = curTime - backBtnTime;
 
-        if(0 <= gapTime && 2000 >= gapTime) {
+        if (0 <= gapTime && 2000 >= gapTime) {
             super.onBackPressed();
-        }
-        else {
+        } else {
             backBtnTime = curTime;
-            Toast.makeText(this, "한번 더 누르면 종료됩니다.",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
         }
     }
 

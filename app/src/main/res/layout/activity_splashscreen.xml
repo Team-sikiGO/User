@@ -11,34 +11,35 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_gravity="center"
         android:layout_margin="15dp"
         android:background="#FFAF00"
-        android:layout_gravity="center"
         android:gravity="center">
 
         <ImageView
             android:id="@+id/splash"
             android:layout_width="500dp"
             android:layout_height="500dp"
-            android:background="@drawable/splash3"
             android:layout_gravity="center"
-            android:gravity="center"/>
+            android:background="@drawable/splash3"
+            android:gravity="center" />
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:gravity="bottom"
             android:orientation="vertical">
+
             <TextView
+                android:id="@+id/copyright"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Copyright(C) 2021.sikiGo.All rights reserved."
-                android:id="@+id/copyright"
                 android:layout_gravity="bottom"
-                android:gravity="center"
-                android:textColor="@color/black"
                 android:layout_marginBottom="10dp"
-                android:textSize="17dp"/>
+                android:gravity="center"
+                android:text="Copyright(C) 2021.sikiGo.All rights reserved."
+                android:textColor="@color/black"
+                android:textSize="17dp" />
         </LinearLayout>
     </FrameLayout>
 </LinearLayout>

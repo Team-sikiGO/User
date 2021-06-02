@@ -33,7 +33,7 @@ public class Search extends AppCompatActivity {
         getSupportActionBar().setTitle("");
 
         //Initialize And Assign Variable
-       bottomNavigationView = findViewById(R.id.bottom_nav);
+        bottomNavigationView = findViewById(R.id.bottom_nav);
 
         //Set Home Selected
         bottomNavigationView.setSelectedItemId(R.id.page_search);
@@ -82,7 +82,7 @@ public class Search extends AppCompatActivity {
         overridePendingTransition(R.anim.none, R.anim.horizon_exit);
     }
 
-    private void updateNavigationBarState(){
+    private void updateNavigationBarState() {
         int actionId = R.id.page_search;
         selectBottomNavigationBarItem(actionId);
     }
@@ -97,12 +97,11 @@ public class Search extends AppCompatActivity {
         long curTime = System.currentTimeMillis();
         long gapTime = curTime - backBtnTime;
 
-        if(0 <= gapTime && 2000 >= gapTime) {
+        if (0 <= gapTime && 2000 >= gapTime) {
             super.onBackPressed();
-        }
-        else {
+        } else {
             backBtnTime = curTime;
-            Toast.makeText(this, "한번 더 누르면 종료됩니다.",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
         }
     }
 
