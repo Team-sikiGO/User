@@ -16,7 +16,8 @@
         android:layout_centerInParent="true"
         android:text="Order"
         android:textSize="50sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_below="@+id/toolbar"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"

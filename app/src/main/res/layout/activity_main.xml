@@ -14,9 +14,11 @@
         android:id="@+id/gridView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
         android:gravity="center"
-        android:numColumns="2"></GridView>
+        android:numColumns="2"
+        android:layout_below="@+id/toolbar"
+        android:layout_centerInParent="true">
+    </GridView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"

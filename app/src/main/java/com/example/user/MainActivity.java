@@ -161,6 +161,8 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(getApplicationContext(), posterTitle[pos] + "click", Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(getApplicationContext(), restaurant.class));
+                    overridePendingTransition(R.anim.horizon_enter, R.anim.none);
                 }
             });
             return imageView;

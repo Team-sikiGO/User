@@ -2,13 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.user">
 
+    <uses-permission android:name="android.permission.INTERNET"/> <!--인터넷 권한 선언-->
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="sikiGo"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.User">
+        android:theme="@style/Theme.User"
+        android:usesCleartextTraffic="true">
         <activity android:name=".Splashscreen"
             android:label="@string/app_name">
             <intent-filter>
@@ -19,7 +22,11 @@
         <activity android:name=".MainActivity"/>
         <activity android:name=".Search"/>
         <activity android:name=".Order"/>
-        <activity android:name=".My">
+        <activity android:name=".My"/>
+        <activity android:name=".LoginActivity"/>
+        <activity android:name=".RegisterActivity"/>
+        <activity android:name=".food_list"/>
+        <activity android:name=".restaurant">
         </activity>
     </application>
 
