@@ -1,10 +1,13 @@
 package com.example.user;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,6 +20,8 @@ public class Order extends AppCompatActivity {
     private Toolbar toolbar;
     BottomNavigationView bottomNavigationView;
     private long backBtnTime = 0;
+    private Bitmap qr;
+    private ImageView img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +32,21 @@ public class Order extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
+
+        // QR code set to ImagView
+        Intent intent = getIntent();
+        qr = (Bitmap)intent.getParcelableExtra("qrcode");
+
+        img = (ImageView) findViewById(R.id.qrcode);
+        img.setImageBitmap(qr);
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), QRcode_popup.class);
+                intent.putExtra("qrcode", qr);
+                startActivity(intent);
+            }
+        });
 
         //Initialize And Assign Variable
         bottomNavigationView = findViewById(R.id.bottom_nav);
@@ -121,4 +141,5 @@ public class Order extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

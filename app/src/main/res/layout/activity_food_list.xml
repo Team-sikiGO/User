@@ -41,6 +41,7 @@ android:background="@color/grey">
 
 
     <Button
+        android:id="@+id/createQR"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginRight="50dp"

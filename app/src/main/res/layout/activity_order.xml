@@ -86,13 +86,15 @@
             android:background="@color/black"></LinearLayout>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/qrcode"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:src="@drawable/qr"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp"></ImageView>
+            android:layout_marginBottom="30dp"
+            android:layout_gravity="center"></ImageView>
 
     </LinearLayout>
 

@@ -22,6 +22,7 @@
         <activity android:name=".MainActivity"/>
         <activity android:name=".Search"/>
         <activity android:name=".Order"/>
+        <activity android:name=".QRcode_popup" android:theme="@android:style/Theme.Dialog"/>
         <activity android:name=".My"/>
         <activity android:name=".LoginActivity"/>
         <activity android:name=".RegisterActivity"/>

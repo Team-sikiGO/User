@@ -2,6 +2,8 @@ package com.example.user;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -11,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -20,6 +23,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +35,7 @@ public class food_list extends AppCompatActivity {
 
     protected BottomNavigationView bottomNavigationView;
     private long backBtnTime = 0;
+    private Button btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +79,19 @@ public class food_list extends AppCompatActivity {
                         return true;
                 }
                 return true;
+            }
+        });
+
+        /* QR 코드 생성 버튼 클릭시 이벤트 처리 */
+        btn = (Button) findViewById(R.id.createQR);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bitmap qr;
+                qr = generateQRCode("https://www.naver.com");
+                Intent orderView = new Intent(getApplicationContext(), Order.class);
+                orderView.putExtra("qrcode", qr);
+                startActivity(orderView);
             }
         });
 
@@ -236,6 +257,31 @@ public class food_list extends AppCompatActivity {
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public static Bitmap generateQRCode(String contents) {
+        Bitmap bitmap = null;
+
+        try {
+            QRCodeWriter qrCodeWriter = new QRCodeWriter();
+            bitmap = toBitmap(qrCodeWriter.encode(contents, BarcodeFormat.QR_CODE, 300 , 300));
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
+
+        return bitmap;
+    }
+
+    private static Bitmap toBitmap(BitMatrix matrix) {
+        int height = matrix.getHeight();
+        int width = matrix.getWidth();
+        Bitmap bmp = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                bmp.setPixel(x, y, matrix.get(x, y) ? Color.BLACK : Color.WHITE);
+            }
+        }
+        return bmp;
     }
 
 }
