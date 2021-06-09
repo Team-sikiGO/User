@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -141,8 +142,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // 이미지 파일을 배열로 초기화
-        Integer[] posterID = {R.drawable.bunsik2, R.drawable.korea2, R.drawable.china2, R.drawable.japan2, R.drawable.italy2, R.drawable.cafe2
-                , R.drawable.chicken2, R.drawable.pizza2, R.drawable.jokbo2, R.drawable.yasik2};
+        Integer[] posterID = {R.drawable.bunsik3, R.drawable.korea3, R.drawable.china3, R.drawable.japan3, R.drawable.italy3, R.drawable.cafe3
+                , R.drawable.chicken3, R.drawable.pizza3, R.drawable.jokbo3, R.drawable.yasik3};
 
         // 카테고리를 문자 배열로 초기화
         String[] posterTitle = {"분식", "한식", "중식", "일식", "양식", "카페", "치킨", "피자", "족발/보쌈", "야식"};
@@ -150,12 +151,11 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) { // 각 그리드뷰의 칸마다 이미지뷰를 생성해서 보여주게 함
             ImageView imageView = new ImageView(context);
-            imageView.setLayoutParams(new GridView.LayoutParams(350, 350));
+            imageView.setLayoutParams(new GridView.LayoutParams(400, 400));
             imageView.setScaleType(ImageView.ScaleType.FIT_CENTER); // 그리드뷰 칸의 중앙에 배치
             imageView.setPadding(2, 2, 2, 2);
 
             imageView.setImageResource(posterID[position]); // R.drawable.mov0x 이미지를 로드하여 출력
-            //TODO 이미지를 클릭했을 때, 원래 이미지 크기가 보이도록 함
             final int pos = position;
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -163,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), posterTitle[pos] + "click", Toast.LENGTH_LONG).show();
                     startActivity(new Intent(getApplicationContext(), restaurant.class));
                     overridePendingTransition(R.anim.horizon_enter, R.anim.none);
+                    finish();
                 }
             });
             return imageView;
@@ -170,7 +171,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.toolbar_menu, menu);
         return true;
@@ -180,13 +180,14 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logout:
-                Toast.makeText(getApplicationContext(), "Logout", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "로그아웃", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                overridePendingTransition(R.anim.horizon_enter, R.anim.none);
+                finish();
                 return true;
-            case R.id.account:
-                Toast.makeText(getApplicationContext(), "Account", Toast.LENGTH_LONG).show();
-                return true;
-
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public static Activity MainActivity;
 }

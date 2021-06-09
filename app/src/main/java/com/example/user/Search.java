@@ -116,12 +116,11 @@ public class Search extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logout:
-                Toast.makeText(getApplicationContext(), "Logout", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "로그아웃", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                overridePendingTransition(R.anim.horizon_enter, R.anim.none);
+                finish();
                 return true;
-            case R.id.account:
-                Toast.makeText(getApplicationContext(), "Account", Toast.LENGTH_LONG).show();
-                return true;
-
         }
         return super.onOptionsItemSelected(item);
     }

@@ -8,6 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,6 +23,8 @@ public class Order extends AppCompatActivity {
     private long backBtnTime = 0;
     private Bitmap qr;
     private ImageView img;
+    private TextView txt;
+    private String menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +36,13 @@ public class Order extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
 
-        // QR code set to ImagView
+        // QR code set to ImageView
         Intent intent = getIntent();
-        qr = (Bitmap)intent.getParcelableExtra("qrcode");
+        qr = (Bitmap) intent.getParcelableExtra("qrcode");
+        menu = (String) intent.getStringExtra("menu");
+
+        txt = (TextView) findViewById(R.id.menu);
+        txt.setText(menu);
 
         img = (ImageView) findViewById(R.id.qrcode);
         img.setImageBitmap(qr);
@@ -134,10 +141,6 @@ public class Order extends AppCompatActivity {
             case R.id.logout:
                 Toast.makeText(getApplicationContext(), "Logout", Toast.LENGTH_LONG).show();
                 return true;
-            case R.id.account:
-                Toast.makeText(getApplicationContext(), "Account", Toast.LENGTH_LONG).show();
-                return true;
-
         }
         return super.onOptionsItemSelected(item);
     }

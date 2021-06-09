@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:numColumns="2"
+        android:numColumns="3"
         android:layout_below="@+id/toolbar"
         android:layout_centerInParent="true"
         android:layout_above="@+id/bottom_nav">
@@ -26,8 +26,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:itemBackground="@color/white"
+        app:itemBackground="@color/orange"
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
-        app:menu="@menu/bottom_navigation_menu" />
+        app:menu="@menu/bottom_navigation_menu"/>
 </RelativeLayout>

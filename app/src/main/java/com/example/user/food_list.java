@@ -42,6 +42,12 @@ public class food_list extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_list);
 
+        final ListView list = (ListView) findViewById(R.id.list01);
+        final ListView menu = (ListView) findViewById(R.id.main_list);
+
+        List<String> food_menu = new ArrayList<>();
+        List<String> data = new ArrayList<>();
+
         //Initialize And Assign Variable
         bottomNavigationView = findViewById(R.id.bottom_nav);
 
@@ -88,106 +94,99 @@ public class food_list extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Bitmap qr;
-                qr = generateQRCode("https://www.naver.com");
+                String menu = "";
+                for (int i = 0; i < data.size(); i++) {
+                    String str = data.get(i);
+                    String[] arr = str.split(" x ");
+                    menu = menu.concat(arr[0]);
+                    menu = menu.concat("\t\t\t· · · · ·\t\t\t");
+                    menu = menu.concat(" X");
+                    menu = menu.concat(arr[1]);
+                    if (i == data.size() - 1) {
+                        break;
+                    } else {
+                        menu = menu.concat("\n");
+                    }
+                }
+
+                //Toast.makeText(getApplicationContext(), menu, Toast.LENGTH_SHORT).show();
+                qr = generateQRCode(menu);
                 Intent orderView = new Intent(getApplicationContext(), Order.class);
+                orderView.putExtra("menu", menu);
                 orderView.putExtra("qrcode", qr);
                 startActivity(orderView);
+                overridePendingTransition(R.anim.horizon_enter, R.anim.none);
+                finish();
             }
         });
 
         Intent food = getIntent();
         String tag = food.getStringExtra("it_tag");
-        int[] cnt = new int[16];
-        for(int i = 0; i<16;i++)
-            cnt[i] = 1;
+        int[] cnt = new int[8];
+        for (int i = 0; i < 8; i++)
+            cnt[i] = 0;
 
-        final GridView gridView = (GridView)findViewById(R.id.GridView01);
-        final ListView list = (ListView)findViewById(R.id.list01);
+        /* final GridView gridView = (GridView) findViewById(R.id.GridView01);*/
 
-        List<String> data = new ArrayList<>();
+        food_menu.add("짜장면");
+        food_menu.add("짬뽕");
+        food_menu.add("간짜장");
+        food_menu.add("쟁반짜장");
+        food_menu.add("탕수육(소)");
+        food_menu.add("탕수육(중)");
+        food_menu.add("탕수육(대)");
+        food_menu.add("양장피");
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,data);
+        ArrayAdapter<String> list_adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, food_menu);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, data);
+
+        menu.setAdapter(list_adapter);
         list.setAdapter(adapter);
 
-        gridView.setAdapter(new ImageAdapter(this));
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        menu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                int checked ;
-                int count = adapter.getCount() ;
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
-                if (cnt[position] > 1)
-                {
-                    if (count > 0) {
-                        checked = position;
-                        if (checked > -1 && checked < count) {
-                            data.set(checked, position + "  x  " + cnt[position]) ;
-                            adapter.notifyDataSetChanged();
-                            cnt[position]++;
-                        }
-                    }
-                }
-                else{
-                    data.add(position + "  x  " + cnt[position]);
+                String food = (String) adapterView.getItemAtPosition(position);
+                cnt[position]++;
+                data.clear();
+
+                for (int n = 0; n < 8; n++) {
+                    if (cnt[n] != 0)
+                        data.add((String) adapterView.getItemAtPosition(n) + "  x  " + cnt[n]);
                     adapter.notifyDataSetChanged();
-                    cnt[position]++;
                 }
             }
         });
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                String text = (String) adapterView.getItemAtPosition(position);
+                String[] array = text.split("  x  ");
 
-
-    }
-
-
-    public class ImageAdapter extends BaseAdapter {
-        private Context mContext;
-        private Integer[] mThumIds = {
-                R.drawable.icon, R.drawable.icon,
-                R.drawable.icon, R.drawable.icon,
-                R.drawable.icon, R.drawable.icon,
-                R.drawable.icon, R.drawable.icon,
-                R.drawable.icon, R.drawable.icon,
-                R.drawable.icon, R.drawable.icon,
-        };
-        public ImageAdapter(Context c) {
-            mContext = c;
-        }
-        @Override
-        public int getCount() {
-            return mThumIds.length;
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            ImageView imageView;
-            if(convertView == null) {
-                imageView = new ImageView(mContext);
-                imageView.setLayoutParams(new GridView.LayoutParams(320, 240));
-                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                imageView.setPadding(1, 1, 1, 1);
+                int n;
+                for(n = 0; n < food_menu.size(); n++)
+                {
+                    boolean result = array[0].equals(food_menu.get(n));
+                    if(result == true)
+                    {
+                        cnt[n]--;
+                        if(cnt[n] == 0)
+                            data.remove(position);
+                        else
+                            data.set(position, array[0] + "  x  " + cnt[n]);
+                        adapter.notifyDataSetChanged();
+                    }
+                }
             }
-            else {
-                imageView = (ImageView)convertView;
-            }
-            imageView.setImageResource(mThumIds[position]);
-            return imageView;
-        }
+        });
     }
 
-    public void pay_page(View v){
+    public void pay_page(View v) {
 
     }
-    public void returntomain(View v){
+
+    public void returntomain(View v) {
         startActivity(new Intent(getApplicationContext(), restaurant.class));
         overridePendingTransition(R.anim.horizon_enter, R.anim.none);
         finish();
@@ -207,7 +206,7 @@ public class food_list extends AppCompatActivity {
         overridePendingTransition(R.anim.none, R.anim.horizon_exit);
     }
 
-    private void updateNavigationBarState(){
+    private void updateNavigationBarState() {
         int actionId = R.id.page_my;
         selectBottomNavigationBarItem(actionId);
     }
@@ -219,10 +218,10 @@ public class food_list extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        overridePendingTransition(R.anim.none, R.anim.horizon_exit);
+        startActivity(new Intent(getApplicationContext(), restaurant.class));
+        overridePendingTransition(R.anim.horizon_exit, R.anim.none);
         finish();
     }
-
 //    @Override
 //    public void onBackPressed() {
 //        long curTime = System.currentTimeMillis();
@@ -239,7 +238,6 @@ public class food_list extends AppCompatActivity {
 
 
     public boolean onCreateOptionsMenu(Menu menu) {
-
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.toolbar_menu, menu);
         return true;
@@ -249,12 +247,8 @@ public class food_list extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logout:
-                Toast.makeText(getApplicationContext(), "Logout", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "로그아웃", Toast.LENGTH_LONG).show();
                 return true;
-            case R.id.account:
-                Toast.makeText(getApplicationContext(), "Account", Toast.LENGTH_LONG).show();
-                return true;
-
         }
         return super.onOptionsItemSelected(item);
     }
@@ -264,7 +258,7 @@ public class food_list extends AppCompatActivity {
 
         try {
             QRCodeWriter qrCodeWriter = new QRCodeWriter();
-            bitmap = toBitmap(qrCodeWriter.encode(contents, BarcodeFormat.QR_CODE, 300 , 300));
+            bitmap = toBitmap(qrCodeWriter.encode(contents, BarcodeFormat.QR_CODE, 300, 300));
         } catch (WriterException e) {
             e.printStackTrace();
         }

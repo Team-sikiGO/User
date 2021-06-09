@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/orange"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -20,27 +20,28 @@
         android:background="@drawable/receipt"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/order_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:text="주문내역"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="50sp"
-            android:textStyle="bold"></TextView>
+<!--        <TextView-->
+<!--            android:id="@+id/order_text"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="50dp"-->
+<!--            android:text="주문내역"-->
+<!--            android:textAlignment="center"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="40sp"-->
+<!--            android:textStyle="bold"></TextView>-->
 
         <TextView
             android:id="@+id/restaurant_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="50dp"
             android:gravity="center"
-            android:text="가게이름 : @@중국집"
+            android:text="경대반점"
             android:textColor="@color/black"
-            android:textSize="30sp"
-            android:textStyle="bold"></TextView>
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:textAlignment="center"></TextView>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,24 +58,59 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:gravity="center"
-            android:text="메뉴\n짜장면\n볶음밥\n탕수육"
+            android:text="선택메뉴"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:textStyle="bold"></TextView>
+            android:textStyle="bold"
+            android:background="@color/yellow"></TextView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_above="@+id/restaurant_name"
+            android:layout_below="@+id/order_text"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/black"></LinearLayout>
+
+
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="짜장면\n볶음밥\n탕수육"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="normal"
+                android:id="@+id/menu"></TextView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_above="@+id/restaurant_name"
+            android:layout_below="@+id/order_text"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/black"></LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:background="@color/grey"
-            android:gravity="center"
-            android:text="가격 : "
-            android:textAlignment="center"
+            android:text="금액 : "
             android:textColor="@color/black"
-            android:textSize="25sp"
-            android:textStyle="bold"></TextView>
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:background="@color/yellow"
+            android:gravity="center"></TextView>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -89,13 +125,12 @@
             android:id="@+id/qrcode"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:src="@drawable/qr"
+            android:layout_gravity="center"
             android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="30dp"
-            android:layout_marginTop="30dp"
             android:layout_marginBottom="30dp"
-            android:layout_gravity="center"></ImageView>
-
+            android:src="@drawable/qr"></ImageView>
     </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -103,7 +138,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:itemBackground="@color/white"
+        app:itemBackground="@color/orange"
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
         app:menu="@menu/bottom_navigation_menu" />

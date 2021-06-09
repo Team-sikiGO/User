@@ -76,6 +76,7 @@ public class restaurant extends AppCompatActivity {
         Intent maintofood = new Intent(this, food_list.class);
         maintofood.putExtra("it_tag", tag);
         startActivity(maintofood);
+        finish();
     }
 
     @Override
@@ -103,13 +104,12 @@ public class restaurant extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        overridePendingTransition(R.anim.none, R.anim.horizon_exit);
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        overridePendingTransition(R.anim.horizon_exit, R.anim.none);
         finish();
     }
 
-
     public boolean onCreateOptionsMenu(Menu menu) {
-
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.toolbar_menu, menu);
         return true;
@@ -119,12 +119,11 @@ public class restaurant extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logout:
-                Toast.makeText(getApplicationContext(), "Logout", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "로그아웃", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                overridePendingTransition(R.anim.horizon_enter, R.anim.none);
+                finish();
                 return true;
-            case R.id.account:
-                Toast.makeText(getApplicationContext(), "Account", Toast.LENGTH_LONG).show();
-                return true;
-
         }
         return super.onOptionsItemSelected(item);
     }

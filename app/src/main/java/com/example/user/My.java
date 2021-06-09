@@ -108,7 +108,10 @@ public class My extends AppCompatActivity {
                         break;
 
                     case R.id.account_logout:
-                        Toast.makeText(getApplicationContext(), "logout click", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Logout", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                        overridePendingTransition(R.anim.horizon_enter, R.anim.none);
+                        finish();
                         break;
 
                     case R.id.notice:
@@ -133,7 +136,6 @@ public class My extends AppCompatActivity {
                 }
             }
         };
-
         imageView_profile.setOnClickListener(clickListener);
         textView_name.setOnClickListener(clickListener);
         textView_logout.setOnClickListener(clickListener);
@@ -200,12 +202,11 @@ public class My extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logout:
-                Toast.makeText(getApplicationContext(), "Logout", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "로그아웃", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                overridePendingTransition(R.anim.horizon_enter, R.anim.none);
+                finish();
                 return true;
-            case R.id.account:
-                Toast.makeText(getApplicationContext(), "Account", Toast.LENGTH_LONG).show();
-                return true;
-
         }
         return super.onOptionsItemSelected(item);
     }
