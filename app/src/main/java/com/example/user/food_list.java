@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,11 +23,18 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +44,7 @@ public class food_list extends AppCompatActivity {
     protected BottomNavigationView bottomNavigationView;
     private long backBtnTime = 0;
     private Button btn;
+    String[] foodArr = new String[10];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +53,6 @@ public class food_list extends AppCompatActivity {
 
         final ListView list = (ListView) findViewById(R.id.list01);
         final ListView menu = (ListView) findViewById(R.id.main_list);
-
-        List<String> food_menu = new ArrayList<>();
-        List<String> data = new ArrayList<>();
 
         //Initialize And Assign Variable
         bottomNavigationView = findViewById(R.id.bottom_nav);
@@ -88,6 +94,9 @@ public class food_list extends AppCompatActivity {
             }
         });
 
+        List<String> food_menu = new ArrayList<>();
+        List<String> data = new ArrayList<>();
+
         /* QR 코드 생성 버튼 클릭시 이벤트 처리 */
         btn = (Button) findViewById(R.id.createQR);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -119,8 +128,8 @@ public class food_list extends AppCompatActivity {
                 finish();
             }
         });
-
         Intent food = getIntent();
+        String resName = food.getStringExtra("가게이름");
         String tag = food.getStringExtra("it_tag");
         int[] cnt = new int[8];
         for (int i = 0; i < 8; i++)
@@ -128,20 +137,41 @@ public class food_list extends AppCompatActivity {
 
         /* final GridView gridView = (GridView) findViewById(R.id.GridView01);*/
 
-        food_menu.add("짜장면");
-        food_menu.add("짬뽕");
-        food_menu.add("간짜장");
-        food_menu.add("쟁반짜장");
-        food_menu.add("탕수육(소)");
-        food_menu.add("탕수육(중)");
-        food_menu.add("탕수육(대)");
-        food_menu.add("양장피");
+//        food_menu.add("짜장면");
+//        food_menu.add("짬뽕");
+//        food_menu.add("간짜장");
+//        food_menu.add("쟁반짜장");
+//        food_menu.add("탕수육(소)");
+//        food_menu.add("탕수육(중)");
+//        food_menu.add("탕수육(대)");
+//        food_menu.add("양장피");
 
         ArrayAdapter<String> list_adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, food_menu);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, data);
 
         menu.setAdapter(list_adapter);
         list.setAdapter(adapter);
+
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray jsonArray = new JSONArray(response);
+                    for(int j=0; j<jsonArray.length(); j++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(j);
+                        String foodName = jsonObject.getString("foodName");
+                        int price = jsonObject.getInt("price");
+                        food_menu.add(foodName);
+                        adapter.notifyDataSetChanged();
+                    }
+                } catch(JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        FoodRequest foodRequest = new FoodRequest(resName, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(food_list.this);
+        queue.add(foodRequest);
 
         menu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -150,7 +180,6 @@ public class food_list extends AppCompatActivity {
                 String food = (String) adapterView.getItemAtPosition(position);
                 cnt[position]++;
                 data.clear();
-
                 for (int n = 0; n < 8; n++) {
                     if (cnt[n] != 0)
                         data.add((String) adapterView.getItemAtPosition(n) + "  x  " + cnt[n]);
@@ -158,6 +187,7 @@ public class food_list extends AppCompatActivity {
                 }
             }
         });
+
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {

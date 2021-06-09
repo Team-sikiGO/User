@@ -13,9 +13,9 @@
         <TextView
             android:text="QR 코드"
             android:textSize="20sp"
-            android:textColor="#fff"
+            android:textColor="@color/black"
             android:gravity="center"
-            android:background="#ff7a00"
+            android:background="@color/yellow"
             android:layout_width="match_parent"
             android:layout_height="53dp" />
     </LinearLayout>

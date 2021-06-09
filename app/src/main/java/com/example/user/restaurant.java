@@ -26,7 +26,6 @@ public class restaurant extends AppCompatActivity {
 
         Intent rest = getIntent();
 
-
         //Initialize And Assign Variable
         bottomNavigationView = findViewById(R.id.bottom_nav);
 
@@ -72,9 +71,11 @@ public class restaurant extends AppCompatActivity {
         int id = v.getId();
         LinearLayout layout = (LinearLayout)v.findViewById(id);
         String tag = (String)layout.getTag();
+        String resName = "두첩분식";
 
         Intent maintofood = new Intent(this, food_list.class);
         maintofood.putExtra("it_tag", tag);
+        maintofood.putExtra("가게이름", resName);
         startActivity(maintofood);
         finish();
     }
