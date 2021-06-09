@@ -196,6 +196,12 @@ public class food_list extends AppCompatActivity {
         item.setChecked(true);
     }
 
+    @Override
+    public void onBackPressed() {
+        overridePendingTransition(R.anim.none, R.anim.horizon_exit);
+        finish();
+    }
+
 //    @Override
 //    public void onBackPressed() {
 //        long curTime = System.currentTimeMillis();
