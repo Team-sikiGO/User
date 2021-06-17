@@ -10,41 +10,47 @@ android:background="@color/white">
 
     <include  layout="@layout/toolbar_main"/>
 
-    <LinearLayout
-        android:id="@+id/item01"
+    <ListView
+        android:id="@+id/res_list"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:clickable="true"
-        android:onClick="food_list"
-        android:orientation="horizontal"
-        android:tag="1"
-        android:layout_below="@+id/toolbar">
+        android:layout_height="200dp"
+        android:layout_below="@+id/toolbar"></ListView>
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="95dp"
-            android:layout_marginStart="50px"
-            android:layout_marginTop="5px"
-            android:layout_marginEnd="50px"
-            android:layout_weight="1"
-            android:adjustViewBounds="true"
-            android:paddingRight="5sp"
-            android:src="@drawable/china2" />
+<!--    <LinearLayout-->
+<!--        android:id="@+id/item01"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="100dp"-->
+<!--        android:clickable="true"-->
+<!--        android:onClick="food_list"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:tag="1"-->
+<!--        android:layout_below="@+id/toolbar">-->
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="2"
-            android:orientation="vertical">
+<!--        <ImageView-->
+<!--            android:layout_width="30dp"-->
+<!--            android:layout_height="95dp"-->
+<!--            android:layout_marginStart="50px"-->
+<!--            android:layout_marginTop="5px"-->
+<!--            android:layout_marginEnd="50px"-->
+<!--            android:layout_weight="1"-->
+<!--            android:adjustViewBounds="true"-->
+<!--            android:paddingRight="5sp"-->
+<!--            android:src="@drawable/china2" />-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="중국집 1호점"
-                android:textStyle="bold" />
-        </LinearLayout>
-    </LinearLayout>
+<!--        <LinearLayout-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_weight="2"-->
+<!--            android:orientation="vertical">-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="중국집 1호점"-->
+<!--                android:textStyle="bold" />-->
+<!--        </LinearLayout>-->
+<!--    </LinearLayout>-->
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
     android:layout_width="match_parent"

@@ -2,17 +2,31 @@ package com.example.user;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class restaurant extends AppCompatActivity {
     protected BottomNavigationView bottomNavigationView;
@@ -23,8 +37,10 @@ public class restaurant extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant);
-
-        Intent rest = getIntent();
+        final ListView reslist = (ListView) findViewById(R.id.res_list);
+        Intent resfrommain = getIntent();
+        int resID = resfrommain.getIntExtra("위치", 0);
+        Intent maintofood = new Intent(this, food_list.class);
 
         //Initialize And Assign Variable
         bottomNavigationView = findViewById(R.id.bottom_nav);
@@ -65,19 +81,46 @@ public class restaurant extends AppCompatActivity {
                 return true;
             }
         });
-    }
+        int[] cnt = new int[8];
+        for (int i = 0; i < 8; i++)
+            cnt[i] = 0;
 
-    public void food_list(View v) {
-        int id = v.getId();
-        LinearLayout layout = (LinearLayout)v.findViewById(id);
-        String tag = (String)layout.getTag();
-        String resName = "두첩분식";
+        List<String> res_list = new ArrayList<>();
+        ArrayAdapter<String> reslist_adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, res_list);
+        reslist.setAdapter(reslist_adapter);
 
-        Intent maintofood = new Intent(this, food_list.class);
-        maintofood.putExtra("it_tag", tag);
-        maintofood.putExtra("가게이름", resName);
-        startActivity(maintofood);
-        finish();
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONArray jsonArray = new JSONArray(response);
+                    for (int j = 0; j < jsonArray.length(); j++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(j);
+                        String resName = jsonObject.getString("resName");
+                        res_list.add(resName);
+                        reslist_adapter.notifyDataSetChanged();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        ResRequest resRequest = new ResRequest(resID, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(restaurant.this);
+        queue.add(resRequest);
+
+        reslist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                           @Override
+                                           public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                                               String name = (String) adapterView.getItemAtPosition(position);
+                                               cnt[position]++;
+                                               res_list.clear();
+                                               maintofood.putExtra("가게이름", name);
+                                               startActivity(maintofood);
+                                               overridePendingTransition(R.anim.horizon_enter, R.anim.horizon_exit);
+                                           }
+                                       }
+        );
     }
 
     @Override
@@ -93,7 +136,7 @@ public class restaurant extends AppCompatActivity {
         overridePendingTransition(R.anim.none, R.anim.horizon_exit);
     }
 
-    private void updateNavigationBarState(){
+    private void updateNavigationBarState() {
         int actionId = R.id.page_my;
         selectBottomNavigationBarItem(actionId);
     }
@@ -105,9 +148,8 @@ public class restaurant extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-        overridePendingTransition(R.anim.horizon_exit, R.anim.none);
         finish();
+        overridePendingTransition(R.anim.horizon_enter, R.anim.horizon_exit);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

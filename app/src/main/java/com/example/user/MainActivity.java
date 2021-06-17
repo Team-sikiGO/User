@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.user.My;
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     protected BottomNavigationView bottomNavigationView;
     private long backBtnTime = 0;
+//    Intent maintores = new Intent(this, restaurant.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,16 +157,17 @@ public class MainActivity extends AppCompatActivity {
             imageView.setLayoutParams(new GridView.LayoutParams(400, 400));
             imageView.setScaleType(ImageView.ScaleType.FIT_CENTER); // 그리드뷰 칸의 중앙에 배치
             imageView.setPadding(2, 2, 2, 2);
+            imageView.setImageResource(posterID[position]); //
 
-            imageView.setImageResource(posterID[position]); // R.drawable.mov0x 이미지를 로드하여 출력
-            final int pos = position;
+            int pos = position;
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(getApplicationContext(), posterTitle[pos] + "click", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(getApplicationContext(), restaurant.class));
-                    overridePendingTransition(R.anim.horizon_enter, R.anim.none);
-                    finish();
+                    Intent maintores = new Intent(v.getContext(), restaurant.class);
+                    maintores.putExtra("위치", pos);
+                    startActivity(maintores);
+                    overridePendingTransition(R.anim.horizon_enter, R.anim.horizon_exit);
                 }
             });
             return imageView;

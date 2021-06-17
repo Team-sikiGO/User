@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -44,15 +45,47 @@ public class food_list extends AppCompatActivity {
     protected BottomNavigationView bottomNavigationView;
     private long backBtnTime = 0;
     private Button btn;
+    private int foodCnt;
     String[] foodArr = new String[10];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_list);
+        int foodArr[] = new int[100];
+        String foodList[] = new String[100];
+
+/*
+        final ListView menu = (ListView) findViewById(R.id.main_list);
+        List<String> food_menu = new ArrayList<>();
+        ArrayAdapter<String> list_adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, food_menu);
+        menu.setAdapter(list_adapter);
+*/
+
+        ListView m_oListView;
+        ListAdapter oAdapter;
+
+        // Adapter 생성
+        oAdapter = new ListAdapter();
+
+        // 리스트뷰 참조 및 Adapter달기
+        m_oListView = (ListView) findViewById(R.id.main_list);
+        m_oListView.setAdapter(oAdapter);
+
+/*
+        final ListView m_oListView = (ListView) findViewById(R.id.main_list);
+        ArrayList<food_item> oData = new ArrayList<>();
+
+                        ListAdapter oAdapter = new ListAdapter(oData);
+                        m_oListView.setAdapter(oAdapter);
+                        */
+
 
         final ListView list = (ListView) findViewById(R.id.list01);
-        final ListView menu = (ListView) findViewById(R.id.main_list);
+        List<String> data = new ArrayList<>();
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, data);
+        list.setAdapter(adapter);
+
 
         //Initialize And Assign Variable
         bottomNavigationView = findViewById(R.id.bottom_nav);
@@ -94,9 +127,6 @@ public class food_list extends AppCompatActivity {
             }
         });
 
-        List<String> food_menu = new ArrayList<>();
-        List<String> data = new ArrayList<>();
-
         /* QR 코드 생성 버튼 클릭시 이벤트 처리 */
         btn = (Button) findViewById(R.id.createQR);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -124,7 +154,7 @@ public class food_list extends AppCompatActivity {
                 orderView.putExtra("menu", menu);
                 orderView.putExtra("qrcode", qr);
                 startActivity(orderView);
-                overridePendingTransition(R.anim.horizon_enter, R.anim.none);
+                overridePendingTransition(R.anim.horizon_enter, R.anim.horizon_exit);
                 finish();
             }
         });
@@ -135,36 +165,27 @@ public class food_list extends AppCompatActivity {
         for (int i = 0; i < 8; i++)
             cnt[i] = 0;
 
-        /* final GridView gridView = (GridView) findViewById(R.id.GridView01);*/
-
-//        food_menu.add("짜장면");
-//        food_menu.add("짬뽕");
-//        food_menu.add("간짜장");
-//        food_menu.add("쟁반짜장");
-//        food_menu.add("탕수육(소)");
-//        food_menu.add("탕수육(중)");
-//        food_menu.add("탕수육(대)");
-//        food_menu.add("양장피");
-
-        ArrayAdapter<String> list_adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, food_menu);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, data);
-
-        menu.setAdapter(list_adapter);
-        list.setAdapter(adapter);
-
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     JSONArray jsonArray = new JSONArray(response);
-                    for(int j=0; j<jsonArray.length(); j++) {
+                    foodCnt = jsonArray.length();
+                    for (int j = 0; j < jsonArray.length(); j++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(j);
                         String foodName = jsonObject.getString("foodName");
                         int price = jsonObject.getInt("price");
-                        food_menu.add(foodName);
+                        Log.i("test", "test = 음식이름 : " + foodName);
+                        foodList[j] = foodName;
+                        oAdapter.addItem(foodName, "가격 : " + price);
+
+/*                        food_item oItem = new food_item();
+                        oItem.food_name = foodName;
+                        oItem.price = "가격 : " + price + "원";
+                        oData.add(oItem);*/
                         adapter.notifyDataSetChanged();
                     }
-                } catch(JSONException e) {
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
@@ -173,55 +194,51 @@ public class food_list extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(food_list.this);
         queue.add(foodRequest);
 
-        menu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+        for (int i = 0; i < foodCnt; i++)
+            foodArr[i] = 0;
 
-                String food = (String) adapterView.getItemAtPosition(position);
-                cnt[position]++;
+        m_oListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView parent, View v, int position, long id) {
+
+                food_item item = (food_item) parent.getItemAtPosition(position);
+                String food = item.getFood_name();
+                String price = item.getPrice();
+
                 data.clear();
-                for (int n = 0; n < 8; n++) {
-                    if (cnt[n] != 0)
-                        data.add((String) adapterView.getItemAtPosition(n) + "  x  " + cnt[n]);
-                    adapter.notifyDataSetChanged();
+                foodArr[position]++;
+                for (int n = 0; n < foodCnt; n++) {
+                    if (foodArr[n] != 0)
+                        data.add(foodList[n] + "  x  " + foodArr[n]);
+
                 }
+                adapter.notifyDataSetChanged();
             }
         });
 
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                String text = (String) adapterView.getItemAtPosition(position);
-                String[] array = text.split("  x  ");
-
-                int n;
-                for(n = 0; n < food_menu.size(); n++)
-                {
-                    boolean result = array[0].equals(food_menu.get(n));
-                    if(result == true)
-                    {
-                        cnt[n]--;
-                        if(cnt[n] == 0)
-                            data.remove(position);
-                        else
-                            data.set(position, array[0] + "  x  " + cnt[n]);
-                        adapter.notifyDataSetChanged();
-                    }
-                }
-            }
-        });
+//        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+//                String text = (String) adapterView.getItemAtPosition(position);
+//                String[] array = text.split("  x  ");
+//
+//                int n;
+//                for(n = 0; n < foodArr.length; n++)
+//                {
+//                    boolean result = array[0].equals();
+//                    if(result == true)
+//                    {
+//                        cnt[n]--;
+//                        if(cnt[n] == 0)
+//                            data.remove(position);
+//                        else
+//                            data.set(position, array[0] + "  x  " + cnt[n]);
+//                        adapter.notifyDataSetChanged();
+//                    }
+//                }
+//            }
+//        });
     }
-
-    public void pay_page(View v) {
-
-    }
-
-    public void returntomain(View v) {
-        startActivity(new Intent(getApplicationContext(), restaurant.class));
-        overridePendingTransition(R.anim.horizon_enter, R.anim.none);
-        finish();
-    }
-
 
     @Override
     protected void onStart() {
@@ -248,24 +265,9 @@ public class food_list extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(getApplicationContext(), restaurant.class));
-        overridePendingTransition(R.anim.horizon_exit, R.anim.none);
         finish();
+        overridePendingTransition(R.anim.horizon_enter, R.anim.horizon_exit);
     }
-//    @Override
-//    public void onBackPressed() {
-//        long curTime = System.currentTimeMillis();
-//        long gapTime = curTime - backBtnTime;
-//
-//        if(0 <= gapTime && 2000 >= gapTime) {
-//            super.onBackPressed();
-//        }
-//        else {
-//            backBtnTime = curTime;
-//            Toast.makeText(this, "한번 더 누르면 종료됩니다.",Toast.LENGTH_SHORT).show();
-//        }
-//    }
-
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
