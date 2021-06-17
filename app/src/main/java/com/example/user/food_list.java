@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -46,47 +47,32 @@ public class food_list extends AppCompatActivity {
     private long backBtnTime = 0;
     private Button btn;
     private int foodCnt;
-    String[] foodArr = new String[10];
+    private int TotalPay = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_list);
-        int foodArr[] = new int[100];
-        String foodList[] = new String[100];
+        int foodNum[] = new int[100]; // 주문할 음식들의 최대개수
+        int foodPay[] = new int[100]; // 주문할 음식들의 가격
+        String foodList[] = new String[100]; //주문 음식 리스트
 
-/*
-        final ListView menu = (ListView) findViewById(R.id.main_list);
-        List<String> food_menu = new ArrayList<>();
-        ArrayAdapter<String> list_adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, food_menu);
-        menu.setAdapter(list_adapter);
-*/
-
-        ListView m_oListView;
+        ListView m_oListView ;
         ListAdapter oAdapter;
 
-        // Adapter 생성
-        oAdapter = new ListAdapter();
+        final TextView text = (TextView) findViewById(R.id.TotalPrice);
 
-        // 리스트뷰 참조 및 Adapter달기
+        oAdapter = new ListAdapter() ;
         m_oListView = (ListView) findViewById(R.id.main_list);
         m_oListView.setAdapter(oAdapter);
-
-/*
-        final ListView m_oListView = (ListView) findViewById(R.id.main_list);
-        ArrayList<food_item> oData = new ArrayList<>();
-
-                        ListAdapter oAdapter = new ListAdapter(oData);
-                        m_oListView.setAdapter(oAdapter);
-                        */
-
 
         final ListView list = (ListView) findViewById(R.id.list01);
         List<String> data = new ArrayList<>();
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, data);
         list.setAdapter(adapter);
 
-
+        oAdapter.notifyDataSetChanged();
+        adapter.notifyDataSetChanged();
         //Initialize And Assign Variable
         bottomNavigationView = findViewById(R.id.bottom_nav);
 
@@ -154,7 +140,7 @@ public class food_list extends AppCompatActivity {
                 orderView.putExtra("menu", menu);
                 orderView.putExtra("qrcode", qr);
                 startActivity(orderView);
-                overridePendingTransition(R.anim.horizon_enter, R.anim.horizon_exit);
+                overridePendingTransition(R.anim.horizon_enter, R.anim.none);
                 finish();
             }
         });
@@ -171,21 +157,17 @@ public class food_list extends AppCompatActivity {
                 try {
                     JSONArray jsonArray = new JSONArray(response);
                     foodCnt = jsonArray.length();
-                    for (int j = 0; j < jsonArray.length(); j++) {
+                    for(int j=0; j<jsonArray.length(); j++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(j);
                         String foodName = jsonObject.getString("foodName");
                         int price = jsonObject.getInt("price");
-                        Log.i("test", "test = 음식이름 : " + foodName);
                         foodList[j] = foodName;
+                        foodPay[j] = price;
                         oAdapter.addItem(foodName, "가격 : " + price);
 
-/*                        food_item oItem = new food_item();
-                        oItem.food_name = foodName;
-                        oItem.price = "가격 : " + price + "원";
-                        oData.add(oItem);*/
                         adapter.notifyDataSetChanged();
                     }
-                } catch (JSONException e) {
+                } catch(JSONException e) {
                     e.printStackTrace();
                 }
             }
@@ -195,7 +177,8 @@ public class food_list extends AppCompatActivity {
         queue.add(foodRequest);
 
         for (int i = 0; i < foodCnt; i++)
-            foodArr[i] = 0;
+            foodNum[i] = 0;
+
 
         m_oListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -205,39 +188,47 @@ public class food_list extends AppCompatActivity {
                 String food = item.getFood_name();
                 String price = item.getPrice();
 
-                data.clear();
-                foodArr[position]++;
-                for (int n = 0; n < foodCnt; n++) {
-                    if (foodArr[n] != 0)
-                        data.add(foodList[n] + "  x  " + foodArr[n]);
 
+                data.clear();
+                foodNum[position]++;
+                TotalPay = 0;
+                for (int n = 0; n < foodCnt; n++) {
+                    if (foodNum[n] != 0)
+                    {
+                        data.add(foodList[n] + "  x  " + foodNum[n]);
+                        TotalPay += foodPay[n] * foodNum[n];
+                    }
                 }
+
+                text.setText("가격 : " + TotalPay + "원");
                 adapter.notifyDataSetChanged();
             }
         });
 
-//        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-//                String text = (String) adapterView.getItemAtPosition(position);
-//                String[] array = text.split("  x  ");
-//
-//                int n;
-//                for(n = 0; n < foodArr.length; n++)
-//                {
-//                    boolean result = array[0].equals();
-//                    if(result == true)
-//                    {
-//                        cnt[n]--;
-//                        if(cnt[n] == 0)
-//                            data.remove(position);
-//                        else
-//                            data.set(position, array[0] + "  x  " + cnt[n]);
-//                        adapter.notifyDataSetChanged();
-//                    }
-//                }
-//            }
-//        });
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                String spl = (String) adapterView.getItemAtPosition(position);
+                String[] array = spl.split("  x  ");
+
+                int n;
+                for(n = 0; n < foodList.length; n++)
+                {
+                    boolean result = array[0].equals(foodList[n]);
+                    if(result == true)
+                    {
+                        foodNum[n]--;
+                        TotalPay = TotalPay - foodPay[n] * 1;
+                        if(foodNum[n] == 0)
+                            data.remove(position);
+                        else
+                            data.set(position, array[0] + "  x  " + foodNum[n]);
+                        text.setText("가격 : " + TotalPay + "원");
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+            }
+        });
     }
 
     @Override

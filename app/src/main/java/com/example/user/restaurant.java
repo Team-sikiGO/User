@@ -89,6 +89,7 @@ public class restaurant extends AppCompatActivity {
         ArrayAdapter<String> reslist_adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, res_list);
         reslist.setAdapter(reslist_adapter);
 
+        reslist_adapter.notifyDataSetChanged();
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
