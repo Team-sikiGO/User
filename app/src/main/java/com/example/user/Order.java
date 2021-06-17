@@ -3,6 +3,7 @@ package com.example.user;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,6 +26,8 @@ public class Order extends AppCompatActivity {
     private ImageView img;
     private TextView txt;
     private String menu;
+    private int price;
+    private String resName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,17 @@ public class Order extends AppCompatActivity {
 
         // QR code set to ImageView
         Intent intent = getIntent();
+        price = intent.getIntExtra("totalPrice", 1);
+        Log.i("test", "test2 : "+ price);
+        resName = intent.getStringExtra("resName");
+
+        TextView ResName = (TextView)findViewById(R.id.restaurant_name);
+        ResName.setText(resName);
+
+        TextView prc = (TextView)findViewById(R.id.price);
+        Log.i("test", "test : "+ price);
+        prc.setText("금액 : " + price + "원");
+
         qr = (Bitmap) intent.getParcelableExtra("qrcode");
         menu = (String) intent.getStringExtra("menu");
 

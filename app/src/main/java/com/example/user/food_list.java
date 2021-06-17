@@ -113,40 +113,11 @@ public class food_list extends AppCompatActivity {
             }
         });
 
-        /* QR 코드 생성 버튼 클릭시 이벤트 처리 */
-        btn = (Button) findViewById(R.id.createQR);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bitmap qr;
-                String menu = "";
-                for (int i = 0; i < data.size(); i++) {
-                    String str = data.get(i);
-                    String[] arr = str.split(" x ");
-                    menu = menu.concat(arr[0]);
-                    menu = menu.concat("\t\t\t· · · · ·\t\t\t");
-                    menu = menu.concat(" X");
-                    menu = menu.concat(arr[1]);
-                    if (i == data.size() - 1) {
-                        break;
-                    } else {
-                        menu = menu.concat("\n");
-                    }
-                }
-
-                //Toast.makeText(getApplicationContext(), menu, Toast.LENGTH_SHORT).show();
-                qr = generateQRCode(menu);
-                Intent orderView = new Intent(getApplicationContext(), Order.class);
-                orderView.putExtra("menu", menu);
-                orderView.putExtra("qrcode", qr);
-                startActivity(orderView);
-                overridePendingTransition(R.anim.horizon_enter, R.anim.none);
-                finish();
-            }
-        });
+        // get Intent
         Intent food = getIntent();
         String resName = food.getStringExtra("가게이름");
         String tag = food.getStringExtra("it_tag");
+
         int[] cnt = new int[8];
         for (int i = 0; i < 8; i++)
             cnt[i] = 0;
@@ -164,7 +135,6 @@ public class food_list extends AppCompatActivity {
                         foodList[j] = foodName;
                         foodPay[j] = price;
                         oAdapter.addItem(foodName, "가격 : " + price);
-
                         adapter.notifyDataSetChanged();
                     }
                 } catch(JSONException e) {
@@ -227,6 +197,40 @@ public class food_list extends AppCompatActivity {
                         adapter.notifyDataSetChanged();
                     }
                 }
+            }
+        });
+
+        /* QR 코드 생성 버튼 클릭시 이벤트 처리 */
+        btn = (Button) findViewById(R.id.createQR);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bitmap qr;
+                String menu = "";
+                for (int i = 0; i < data.size(); i++) {
+                    String str = data.get(i);
+                    String[] arr = str.split(" x ");
+                    menu = menu.concat(arr[0]);
+                    menu = menu.concat("\t\t\t· · · · ·\t\t\t");
+                    menu = menu.concat(" X");
+                    menu = menu.concat(arr[1]);
+                    if (i == data.size() - 1) {
+                        break;
+                    } else {
+                        menu = menu.concat("\n");
+                    }
+                }
+
+                //Toast.makeText(getApplicationContext(), menu, Toast.LENGTH_SHORT).show();
+                qr = generateQRCode(menu);
+                Intent orderView = new Intent(getApplicationContext(), Order.class);
+                orderView.putExtra("menu", menu);
+                orderView.putExtra("qrcode", qr);
+                orderView.putExtra("totalPrice", TotalPay);
+                orderView.putExtra("resName", resName);
+                startActivity(orderView);
+                overridePendingTransition(R.anim.horizon_enter, R.anim.none);
+                finish();
             }
         });
     }

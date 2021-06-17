@@ -65,7 +65,7 @@
             android:layout_width="200dp"
             android:layout_height="40dp"
             android:layout_marginRight="50dp"
-            android:text="Total_price"
+            android:text="가격 : 0원"
             android:textColor="@color/black"
             android:gravity="center_vertical"
             android:textStyle="bold"
