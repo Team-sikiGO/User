@@ -46,34 +46,44 @@ public class LoginActivity extends AppCompatActivity {
                 // EditText에 현재 입력되어있는 값을 get해온다.
                 String userID = et_id.getText().toString();
                 String userPass = et_pass.getText().toString();
+                if (userID.length() != 0 && userPass.length() != 0) {
+                    Response.Listener<String> responseListener = new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            try{
+                                JSONObject jsonObject = new JSONObject(response);
+                                boolean success = jsonObject.getBoolean("success");
+                                if(success) { // 로그인에 성공한 경우
+                                    String userID = jsonObject.getString("userID");
+                                    String userPass = jsonObject.getString("userPassword");
 
-                Response.Listener<String> responseListener = new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try{
-                            JSONObject jsonObject = new JSONObject(response);
-                            boolean success = jsonObject.getBoolean("success");
-                            if(success) { // 로그인에 성공한 경우
-                                String userID = jsonObject.getString("userID");
-                                String userPass = jsonObject.getString("userPassword");
-
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                intent.putExtra("userID", userID);
-                                intent.putExtra("userPass", userPass);
-                                startActivity(intent);
-                                finish();
-                            } else { // 로그인에 실패한 경우
-                                Toast.makeText(getApplicationContext(), "로그인 실패", Toast.LENGTH_SHORT).show();
-                                return;
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    intent.putExtra("userID", userID);
+                                    intent.putExtra("userPass", userPass);
+                                    startActivity(intent);
+                                    finish();
+                                } else { // 로그인에 실패한 경우
+                                    et_pass.setText("");
+                                    et_id.setText("");
+                                    Toast.makeText(getApplicationContext(), "로그인 실패", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
+                    };
+                    LoginRequest loginRequest = new LoginRequest(userID, userPass, responseListener);
+                    RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
+                    queue.add(loginRequest);
+                } else {
+                    if(userID.length() == 0) {
+                        Toast.makeText(getApplicationContext(), "ID를 입력해주세요", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "PW를 입력해주세요", Toast.LENGTH_SHORT).show();
                     }
-                };
-                LoginRequest loginRequest = new LoginRequest(userID, userPass, responseListener);
-                RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
-                queue.add(loginRequest);
+                }
+
             }
         });
     }
