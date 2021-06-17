@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -55,11 +57,20 @@ public class LoginActivity extends AppCompatActivity {
                                 boolean success = jsonObject.getBoolean("success");
                                 if(success) { // 로그인에 성공한 경우
                                     String userID = jsonObject.getString("userID");
-                                    String userPass = jsonObject.getString("userPassword");
+                                    String userName = jsonObject.getString("userName");
+                                    String userNumber = jsonObject.getString("userNumber");
+
+                                    Log.i("로그인", userName);
+                                    Log.i("로그인2", userNumber);
+
+                                    Privacy privacy = (Privacy)getApplicationContext();
+                                    privacy.setName(userName);
+                                    privacy.setNumber(userNumber);
 
                                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                     intent.putExtra("userID", userID);
-                                    intent.putExtra("userPass", userPass);
+                                    intent.putExtra("userName", userName);
+                                    intent.putExtra("userNumber", userNumber);
                                     startActivity(intent);
                                     finish();
                                 } else { // 로그인에 실패한 경우
@@ -77,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
                     RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
                     queue.add(loginRequest);
                 } else {
-                    if(userID.length() == 0) {
+                    if (userID.length() == 0) {
                         et_pass.setText("");
                         et_id.setText("");
                         Toast.makeText(getApplicationContext(), "ID를 입력해주세요", Toast.LENGTH_SHORT).show();

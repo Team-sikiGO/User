@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,9 +25,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -90,6 +100,22 @@ public class My extends AppCompatActivity {
         TextView textView_order_detail = (TextView) findViewById(R.id.order_detail);
         TextView textView_cs = (TextView) findViewById(R.id.cs);
         TextView textView_policy = (TextView) findViewById(R.id.policy);
+
+        Privacy privacy = (Privacy)getApplicationContext();
+        String Name = privacy.getName();
+        String Number = privacy.getNumber();
+        String str = Name + '\n' + '\n' + Number;
+        textView_name.setText(str);
+        Log.i("name", Name);
+        Log.i("number", Number);
+
+//        Intent fromlogin = getIntent();
+//        String Name = fromlogin.getStringExtra("userName");
+//        String Num = fromlogin.getStringExtra("userNumber");
+//        Log.i("이름", Name);
+//        Log.i("번호", Num);
+//        String NameNum = Name + '\n' + '\n' + Num;
+//        textView_name.setText(NameNum);
 
         View.OnClickListener clickListener = new View.OnClickListener() {
             @Override

@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     protected BottomNavigationView bottomNavigationView;
     private long backBtnTime = 0;
-//    Intent maintores = new Intent(this, restaurant.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -38,6 +38,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,6 +49,7 @@ public class food_list extends AppCompatActivity {
     private Button btn;
     private int foodCnt;
     private int TotalPay = 0;
+    NumberFormat numberFormat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -18,6 +18,9 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 public class Order extends AppCompatActivity {
     private Toolbar toolbar;
     BottomNavigationView bottomNavigationView;
@@ -28,6 +31,7 @@ public class Order extends AppCompatActivity {
     private String menu;
     private int price;
     private String resName;
+    NumberFormat numberFormat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +52,10 @@ public class Order extends AppCompatActivity {
         TextView ResName = (TextView)findViewById(R.id.restaurant_name);
         ResName.setText(resName);
 
+        numberFormat = new DecimalFormat("###,###");
         TextView prc = (TextView)findViewById(R.id.price);
         Log.i("test", "test : "+ price);
-        prc.setText("금액 : " + price + "원");
+        prc.setText("금액 : " + numberFormat.format(price) + "원");
 
         qr = (Bitmap) intent.getParcelableExtra("qrcode");
         menu = (String) intent.getStringExtra("menu");
