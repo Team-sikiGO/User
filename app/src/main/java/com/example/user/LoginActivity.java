@@ -78,8 +78,12 @@ public class LoginActivity extends AppCompatActivity {
                     queue.add(loginRequest);
                 } else {
                     if(userID.length() == 0) {
+                        et_pass.setText("");
+                        et_id.setText("");
                         Toast.makeText(getApplicationContext(), "ID를 입력해주세요", Toast.LENGTH_SHORT).show();
                     } else {
+                        et_pass.setText("");
+                        et_id.setText("");
                         Toast.makeText(getApplicationContext(), "PW를 입력해주세요", Toast.LENGTH_SHORT).show();
                     }
                 }
