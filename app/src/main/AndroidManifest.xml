@@ -32,6 +32,7 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".FoodList" />
         <activity android:name=".Restaurant" />
+        <activity android:name=".MyOrderList"/>
         <activity android:name=".Detail"></activity>
     </application>
 

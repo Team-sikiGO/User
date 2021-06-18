@@ -234,12 +234,6 @@ public class FoodList extends AppCompatActivity {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm");
                 String date = sdf.format(mdate);
 
-//                Log.i("주문내역1", userID);
-//                Log.i("주문내역2", resName);
-//                Log.i("주문내역3", menu);
-//                Log.i("주문내역4", TotalPay + "");
-//                Log.i("주문내역5", date);
-
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

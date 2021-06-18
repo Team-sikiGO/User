@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     protected BottomNavigationView bottomNavigationView;
     private long backBtnTime = 0;
-    public String test = "asd";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
