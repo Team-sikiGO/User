@@ -38,6 +38,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -136,7 +137,8 @@ public class food_list extends AppCompatActivity {
                         int price = jsonObject.getInt("price");
                         foodList[j] = foodName;
                         foodPay[j] = price;
-                        oAdapter.addItem(foodName, "가격 : " + price);
+                        numberFormat = new DecimalFormat("###,###");
+                        oAdapter.addItem(foodName, "가격 : " + numberFormat.format(price));
                         adapter.notifyDataSetChanged();
                     }
                 } catch(JSONException e) {
@@ -171,8 +173,8 @@ public class food_list extends AppCompatActivity {
                         TotalPay += foodPay[n] * foodNum[n];
                     }
                 }
-
-                text.setText("가격 : " + TotalPay + "원");
+                numberFormat = new DecimalFormat("###,###");
+                text.setText("가격 : " + numberFormat.format(TotalPay) + "원");
                 adapter.notifyDataSetChanged();
             }
         });
@@ -195,7 +197,8 @@ public class food_list extends AppCompatActivity {
                             data.remove(position);
                         else
                             data.set(position, array[0] + "  x  " + foodNum[n]);
-                        text.setText("가격 : " + TotalPay + "원");
+                        numberFormat = new DecimalFormat("###,###");
+                        text.setText("가격 : " + numberFormat.format(TotalPay) + "원");
                         adapter.notifyDataSetChanged();
                     }
                 }
