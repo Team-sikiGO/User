@@ -114,7 +114,7 @@ public class Order extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         overridePendingTransition(R.anim.horizon_enter, R.anim.none);
-        updateNavigationBarState();
+//        updateNavigationBarState();
     }
 
     @Override
@@ -135,15 +135,7 @@ public class Order extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        long curTime = System.currentTimeMillis();
-        long gapTime = curTime - backBtnTime;
-
-        if (0 <= gapTime && 2000 >= gapTime) {
-            super.onBackPressed();
-        } else {
-            backBtnTime = curTime;
-            Toast.makeText(this, "한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
-        }
+       finish();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

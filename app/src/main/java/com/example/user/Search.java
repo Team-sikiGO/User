@@ -32,6 +32,9 @@ public class Search extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
 
+        Privacy privacy = (Privacy) getApplicationContext();
+        String userID = privacy.getID();
+
         //Initialize And Assign Variable
         bottomNavigationView = findViewById(R.id.bottom_nav);
 
@@ -53,7 +56,9 @@ public class Search extends AppCompatActivity {
                         return true;
 
                     case R.id.page_order:
-                        startActivity(new Intent(getApplicationContext(), Order.class));
+                        Intent detail = new Intent(Search.this, Detail.class);
+                        detail.putExtra("userID", userID);
+                        startActivity(detail);
                         overridePendingTransition(R.anim.horizon_enter, R.anim.none);
                         finish();
                         return true;

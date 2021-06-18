@@ -123,7 +123,7 @@ public class Detail extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottom_nav);
 
         //Set Home Selected
-        bottomNavigationView.setSelectedItemId(R.id.page_my);
+        bottomNavigationView.setSelectedItemId(R.id.page_order);
 
         //Perform ItemSelectedListener
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -143,12 +143,12 @@ public class Detail extends AppCompatActivity {
                         return true;
 
                     case R.id.page_order:
-                        startActivity(new Intent(getApplicationContext(), Order.class));
-                        overridePendingTransition(R.anim.horizon_enter, R.anim.none);
-                        finish();
                         return true;
 
                     case R.id.page_my:
+                        startActivity(new Intent(getApplicationContext(), My.class));
+                        overridePendingTransition(R.anim.horizon_enter, R.anim.none);
+                        finish();
                         return true;
                 }
                 return true;
@@ -170,7 +170,7 @@ public class Detail extends AppCompatActivity {
     }
 
     private void updateNavigationBarState() {
-        int actionId = R.id.page_my;
+        int actionId = R.id.page_order;
         selectBottomNavigationBarItem(actionId);
     }
 
@@ -181,8 +181,15 @@ public class Detail extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        finish();
-        overridePendingTransition(R.anim.none, R.anim.horizon_exit);
+        long curTime = System.currentTimeMillis();
+        long gapTime = curTime - backBtnTime;
+
+        if (0 <= gapTime && 2000 >= gapTime) {
+            super.onBackPressed();
+        } else {
+            backBtnTime = curTime;
+            Toast.makeText(this, "한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

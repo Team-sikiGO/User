@@ -41,6 +41,9 @@ public class Restaurant extends AppCompatActivity {
         String userID = resfrommain.getStringExtra("userID");
         Intent maintofood = new Intent(this, FoodList.class);
 
+        Privacy privacy = (Privacy) getApplicationContext();
+        String userID2 = privacy.getID();
+
         //Initialize And Assign Variable
         bottomNavigationView = findViewById(R.id.bottom_nav);
 
@@ -66,7 +69,9 @@ public class Restaurant extends AppCompatActivity {
                         return true;
 
                     case R.id.page_order:
-                        startActivity(new Intent(getApplicationContext(), Order.class));
+                        Intent detail = new Intent(Restaurant.this, Detail.class);
+                        detail.putExtra("userID", userID2);
+                        startActivity(detail);
                         overridePendingTransition(R.anim.horizon_enter, R.anim.none);
                         finish();
                         return true;

@@ -30,6 +30,23 @@ public class My extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
 
+        imageView_profile = (CircleImageView) findViewById(R.id.profile);
+        TextView textView_name = (TextView) findViewById(R.id.name);
+        TextView textView_logout = (TextView) findViewById(R.id.account_logout);
+        TextView textView_notice = (TextView) findViewById(R.id.notice);
+        TextView textView_manage_account = (TextView) findViewById(R.id.manage_account);
+        TextView textView_order_detail = (TextView) findViewById(R.id.order_detail);
+        TextView textView_cs = (TextView) findViewById(R.id.cs);
+        TextView textView_policy = (TextView) findViewById(R.id.policy);
+
+        //이름, 전화번호 전역변수 사용
+        Privacy privacy = (Privacy) getApplicationContext();
+        String userID = privacy.getID();
+        String Name = privacy.getName();
+        String Number = privacy.getNumber();
+        String str = Name + '\n' + '\n' + Number;
+        textView_name.setText(str);
+
         // toolbar setting
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -59,9 +76,12 @@ public class My extends AppCompatActivity {
                         return true;
 
                     case R.id.page_order:
-                        startActivity(new Intent(getApplicationContext(), Order.class));
-                        overridePendingTransition(R.anim.horizon_enter, R.anim.none);
-                        finish();
+                        Toast.makeText(getApplicationContext(), "order_detail click", Toast.LENGTH_SHORT).show();
+                        Intent detail = new Intent(My.this, Detail.class);
+                        detail.putExtra("userID", userID);
+                        startActivity(detail);
+                        overridePendingTransition(R.anim.horizon_enter, R.anim.horizon_exit);
+//                        finish();
                         return true;
 
                     case R.id.page_my:
@@ -70,22 +90,6 @@ public class My extends AppCompatActivity {
                 return true;
             }
         });
-        imageView_profile = (CircleImageView) findViewById(R.id.profile);
-        TextView textView_name = (TextView) findViewById(R.id.name);
-        TextView textView_logout = (TextView) findViewById(R.id.account_logout);
-        TextView textView_notice = (TextView) findViewById(R.id.notice);
-        TextView textView_manage_account = (TextView) findViewById(R.id.manage_account);
-        TextView textView_order_detail = (TextView) findViewById(R.id.order_detail);
-        TextView textView_cs = (TextView) findViewById(R.id.cs);
-        TextView textView_policy = (TextView) findViewById(R.id.policy);
-
-        //이름, 전화번호 전역변수 사용
-        Privacy privacy = (Privacy) getApplicationContext();
-        String userID = privacy.getID();
-        String Name = privacy.getName();
-        String Number = privacy.getNumber();
-        String str = Name + '\n' + '\n' + Number;
-        textView_name.setText(str);
 
         View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
