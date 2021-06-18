@@ -15,16 +15,15 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar"
-        android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
         android:background="@drawable/yellow_round"
         android:gravity="center"
         android:text="주문 내역"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="25sp"
-        android:textStyle="bold">
-    </TextView>
+        android:textStyle="bold"></TextView>
 
     <ListView
         android:id="@+id/details_list"
@@ -32,8 +31,7 @@
         android:layout_height="570dp"
         android:layout_above="@+id/bottom_nav"
         android:layout_below="@+id/details"
-        android:gravity="center">
-    </ListView>
+        android:gravity="center"></ListView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"

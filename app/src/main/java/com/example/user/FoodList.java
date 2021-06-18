@@ -231,7 +231,7 @@ public class FoodList extends AppCompatActivity {
 
                 long now = System.currentTimeMillis();
                 Date mdate = new Date(now);
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
                 String date = sdf.format(mdate);
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
@@ -240,8 +240,6 @@ public class FoodList extends AppCompatActivity {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             boolean success = jsonObject.getBoolean("success");
-                            if (success)
-                                Toast.makeText(getApplicationContext(), "주문 내역 저장에 성공", Toast.LENGTH_SHORT).show();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

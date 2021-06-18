@@ -76,7 +76,6 @@ public class My extends AppCompatActivity {
                         return true;
 
                     case R.id.page_order:
-                        Toast.makeText(getApplicationContext(), "order_detail click", Toast.LENGTH_SHORT).show();
                         Intent detail = new Intent(My.this, Detail.class);
                         detail.putExtra("userID", userID);
                         startActivity(detail);
@@ -103,26 +102,22 @@ public class My extends AppCompatActivity {
                         break;
 
                     case R.id.name:
-                        Toast.makeText(getApplicationContext(), "name click", Toast.LENGTH_SHORT).show();
                         break;
 
                     case R.id.account_logout:
-                        Toast.makeText(getApplicationContext(), "Logout", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "로그아웃", Toast.LENGTH_LONG).show();
                         startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                         overridePendingTransition(R.anim.horizon_enter, R.anim.none);
                         finish();
                         break;
 
                     case R.id.notice:
-                        Toast.makeText(getApplicationContext(), "noitce click", Toast.LENGTH_SHORT).show();
                         break;
 
                     case R.id.manage_account:
-                        Toast.makeText(getApplicationContext(), "manage_account click", Toast.LENGTH_SHORT).show();
                         break;
 
                     case R.id.order_detail:
-                        Toast.makeText(getApplicationContext(), "order_detail click", Toast.LENGTH_SHORT).show();
                         Intent detail = new Intent(My.this, Detail.class);
                         detail.putExtra("userID", userID);
                         startActivity(detail);
@@ -130,11 +125,9 @@ public class My extends AppCompatActivity {
                         break;
 
                     case R.id.cs:
-                        Toast.makeText(getApplicationContext(), "cs click", Toast.LENGTH_SHORT).show();
                         break;
 
                     case R.id.policy:
-                        Toast.makeText(getApplicationContext(), "policy click", Toast.LENGTH_SHORT).show();
                         break;
                 }
             }

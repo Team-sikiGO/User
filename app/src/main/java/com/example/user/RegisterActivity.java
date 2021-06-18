@@ -44,13 +44,14 @@ public class RegisterActivity extends AppCompatActivity {
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(et_id.getText().toString().replace(" ", " ").equals("")) {
+                if (et_id.getText().toString().replace(" ", " ").equals("")) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
                     builder.setMessage("아이디를 입력해주세요.");
                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss(); }
+                            dialog.dismiss();
+                        }
                     });
                     builder.show();
                     return;
@@ -69,7 +70,7 @@ public class RegisterActivity extends AppCompatActivity {
                     builder.show();
                     return;
                 }
-                if(et_pass.getText().toString().replace(" ", " ").equals("") || et_pass.length() < 8) {
+                if (et_pass.getText().toString().replace(" ", " ").equals("") || et_pass.length() < 8) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
                     builder.setMessage("비밀번호는 8자 이상이어야 합니다.");
                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -81,7 +82,7 @@ public class RegisterActivity extends AppCompatActivity {
                     builder.show();
                     return;
                 }
-                if(et_name.getText().toString().replace(" ", " ").equals("")) {
+                if (et_name.getText().toString().replace(" ", " ").equals("")) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
                     builder.setMessage("이름을 입력해주세요.");
                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -93,7 +94,7 @@ public class RegisterActivity extends AppCompatActivity {
                     builder.show();
                     return;
                 }
-                if(et_number.getText().toString().replace(" ", " ").equals("")) {
+                if (et_number.getText().toString().replace(" ", " ").equals("")) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
                     builder.setMessage("번호를 입력해주세요.");
                     builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {

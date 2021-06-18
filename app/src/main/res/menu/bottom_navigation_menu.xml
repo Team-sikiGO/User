@@ -5,23 +5,23 @@
         android:id="@+id/page_home"
         android:enabled="true"
         android:icon="@drawable/ic_home"
-        android:title="홈"/>
+        android:title="홈" />
 
     <item
         android:id="@+id/page_search"
         android:enabled="true"
         android:icon="@drawable/ic_search"
-        android:title="검색"/>
+        android:title="검색" />
 
     <item
         android:id="@+id/page_order"
         android:enabled="true"
         android:icon="@drawable/ic_order"
-        android:title="주문 내역"/>
+        android:title="주문 내역" />
 
     <item
         android:id="@+id/page_my"
         android:enabled="true"
         android:icon="@drawable/ic_my"
-        android:title="내 정보"/>
+        android:title="내 정보" />
 </menu>

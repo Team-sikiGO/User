@@ -17,6 +17,7 @@ public class Splashscreen extends Activity {
         Window window = getWindow();
         window.setFormat(PixelFormat.RGBA_8888);
     }
+
     Thread splashTread;
 
     @Override

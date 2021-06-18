@@ -37,7 +37,7 @@ public class Detail extends AppCompatActivity {
     String cDate;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
@@ -49,7 +49,7 @@ public class Detail extends AppCompatActivity {
         final ListView list;
         DetailAdapter dAdapter;
         dAdapter = new DetailAdapter();
-        list= (ListView)findViewById(R.id.details_list);
+        list = (ListView) findViewById(R.id.details_list);
         list.setAdapter(dAdapter);
 
         Intent detail = getIntent();
@@ -60,7 +60,7 @@ public class Detail extends AppCompatActivity {
             public void onResponse(String response) {
                 try {
                     JSONArray jsonArray = new JSONArray(response);
-                    for(int j=0; j<jsonArray.length(); j++) {
+                    for (int j = 0; j < jsonArray.length(); j++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(j);
                         String resName = jsonObject.getString("resName");
                         String date = jsonObject.getString("date");
@@ -71,7 +71,7 @@ public class Detail extends AppCompatActivity {
                         dAdapter.addItem(resName, date);
                         dAdapter.notifyDataSetChanged();
                     }
-                } catch(JSONException e) {
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
@@ -108,7 +108,7 @@ public class Detail extends AppCompatActivity {
                             startActivity(orderView);
                             overridePendingTransition(R.anim.horizon_enter, R.anim.none);
 //                            finish();
-                        } catch(JSONException e) {
+                        } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }

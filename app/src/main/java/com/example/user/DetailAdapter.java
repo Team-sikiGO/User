@@ -9,16 +9,15 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class DetailAdapter extends BaseAdapter
-{
-    private ArrayList<FoodItem> d_data = new ArrayList<FoodItem>() ;
+public class DetailAdapter extends BaseAdapter {
+    private ArrayList<FoodItem> d_data = new ArrayList<FoodItem>();
 
     public DetailAdapter() {
     }
 
     @Override
     public int getCount() {
-        return d_data.size() ;
+        return d_data.size();
     }
 
     @Override
@@ -31,8 +30,8 @@ public class DetailAdapter extends BaseAdapter
             convertView = inflater.inflate(R.layout.food_item, parent, false);
         }
 
-        TextView titleTextView = (TextView) convertView.findViewById(R.id.textTitle) ;
-        TextView descTextView = (TextView) convertView.findViewById(R.id.textDate) ;
+        TextView titleTextView = (TextView) convertView.findViewById(R.id.textTitle);
+        TextView descTextView = (TextView) convertView.findViewById(R.id.textDate);
 
         FoodItem listViewItem = d_data.get(position);
 
@@ -44,12 +43,12 @@ public class DetailAdapter extends BaseAdapter
 
     @Override
     public long getItemId(int position) {
-        return position ;
+        return position;
     }
 
     @Override
     public Object getItem(int position) {
-        return d_data.get(position) ;
+        return d_data.get(position);
     }
 
     public void addItem(String title, String desc) {
