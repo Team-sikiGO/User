@@ -61,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                                     String userNumber = jsonObject.getString("userNumber");
 
                                     Privacy privacy = (Privacy) getApplicationContext();
+                                    privacy.setID(userID);
                                     privacy.setName(userName);
                                     privacy.setNumber(userNumber);
 

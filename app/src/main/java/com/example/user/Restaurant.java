@@ -140,7 +140,7 @@ public class Restaurant extends AppCompatActivity {
     }
 
     private void updateNavigationBarState() {
-        int actionId = R.id.page_my;
+        int actionId = R.id.page_home;
         selectBottomNavigationBarItem(actionId);
     }
 

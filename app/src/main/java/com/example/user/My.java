@@ -1,42 +1,20 @@
 package com.example.user;
 
-import android.Manifest;
-import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.Volley;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -103,6 +81,7 @@ public class My extends AppCompatActivity {
 
         //이름, 전화번호 전역변수 사용
         Privacy privacy = (Privacy) getApplicationContext();
+        String userID = privacy.getID();
         String Name = privacy.getName();
         String Number = privacy.getNumber();
         String str = Name + '\n' + '\n' + Number;
@@ -140,7 +119,9 @@ public class My extends AppCompatActivity {
 
                     case R.id.order_detail:
                         Toast.makeText(getApplicationContext(), "order_detail click", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getApplicationContext(), MyOrderList.class));
+                        Intent detail = new Intent(My.this, Detail.class);
+                        detail.putExtra("userID", userID);
+                        startActivity(detail);
                         overridePendingTransition(R.anim.horizon_enter, R.anim.horizon_exit);
                         break;
 

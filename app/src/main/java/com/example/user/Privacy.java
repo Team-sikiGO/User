@@ -4,6 +4,7 @@ import android.app.Application;
 
 public class Privacy extends Application {
 
+    private String ID;
     private String Name;
     private String Number;
 
@@ -17,6 +18,14 @@ public class Privacy extends Application {
     @Override
     public void onTerminate() {
         super.onTerminate();
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public String getID() {
+        return ID;
     }
 
     public void setName(String Name) {
@@ -34,4 +43,5 @@ public class Privacy extends Application {
     public String getNumber() {
         return Number;
     }
+
 }
