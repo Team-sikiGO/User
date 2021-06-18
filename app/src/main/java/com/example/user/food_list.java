@@ -47,13 +47,14 @@ import java.util.Date;
 import java.util.List;
 
 public class food_list extends AppCompatActivity {
-
     protected BottomNavigationView bottomNavigationView;
     private long backBtnTime = 0;
     private Button btn;
     private int foodCnt;
     private int TotalPay = 0;
     NumberFormat numberFormat;
+    int resID;
+    String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +64,9 @@ public class food_list extends AppCompatActivity {
         int foodPay[] = new int[100]; // 주문할 음식들의 가격
         String foodList[] = new String[100]; //주문 음식 리스트
         Intent food = getIntent();
-        String userID = food.getStringExtra("userID");
+        userID = food.getStringExtra("userID");
         String resName = food.getStringExtra("가게이름");
+        resID = food.getIntExtra("resID", 0);
 
         ListView m_oListView;
         ListAdapter oAdapter;
@@ -237,11 +239,11 @@ public class food_list extends AppCompatActivity {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm");
                 String date = sdf.format(mdate);
 
-                Log.i("주문내역1", userID);
-                Log.i("주문내역2", resName);
-                Log.i("주문내역3", menu);
-                Log.i("주문내역4", TotalPay + "");
-                Log.i("주문내역5", date);
+//                Log.i("주문내역1", userID);
+//                Log.i("주문내역2", resName);
+//                Log.i("주문내역3", menu);
+//                Log.i("주문내역4", TotalPay + "");
+//                Log.i("주문내역5", date);
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
@@ -293,8 +295,12 @@ public class food_list extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        Intent intent = new Intent(food_list.this, restaurant.class);
+        intent.putExtra("userID", userID);
+        intent.putExtra("위치", resID);
+        startActivity(intent);
+        overridePendingTransition(R.anim.none, R.anim.none);
         finish();
-        overridePendingTransition(R.anim.horizon_enter, R.anim.horizon_exit);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

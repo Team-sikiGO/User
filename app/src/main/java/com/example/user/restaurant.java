@@ -119,8 +119,10 @@ public class restaurant extends AppCompatActivity {
                                                res_list.clear();
                                                maintofood.putExtra("userID", userID);
                                                maintofood.putExtra("가게이름", name);
+                                               maintofood.putExtra("resID", resID);
                                                startActivity(maintofood);
                                                overridePendingTransition(R.anim.horizon_enter, R.anim.horizon_exit);
+                                               finish();
                                            }
                                        }
         );
