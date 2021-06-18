@@ -103,9 +103,7 @@ public class FoodList extends AppCompatActivity {
                         return true;
 
                     case R.id.page_order:
-                        Intent detail = new Intent(FoodList.this, Detail.class);
-                        detail.putExtra("userID", userID2);
-                        startActivity(detail);
+                        startActivity(new Intent(getApplicationContext(), Order.class));
                         overridePendingTransition(R.anim.horizon_enter, R.anim.none);
                         finish();
                         return true;
@@ -235,6 +233,12 @@ public class FoodList extends AppCompatActivity {
                 Date mdate = new Date(now);
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm");
                 String date = sdf.format(mdate);
+
+//                Log.i("주문내역1", userID);
+//                Log.i("주문내역2", resName);
+//                Log.i("주문내역3", menu);
+//                Log.i("주문내역4", TotalPay + "");
+//                Log.i("주문내역5", date);
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
