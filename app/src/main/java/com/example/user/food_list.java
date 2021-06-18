@@ -41,7 +41,9 @@ import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class food_list extends AppCompatActivity {
@@ -60,13 +62,15 @@ public class food_list extends AppCompatActivity {
         int foodNum[] = new int[100]; // 주문할 음식들의 최대개수
         int foodPay[] = new int[100]; // 주문할 음식들의 가격
         String foodList[] = new String[100]; //주문 음식 리스트
+        Intent food = getIntent();
+        String userID = food.getStringExtra("userID");
+        String resName = food.getStringExtra("가게이름");
 
-        ListView m_oListView ;
+        ListView m_oListView;
         ListAdapter oAdapter;
-
         final TextView text = (TextView) findViewById(R.id.TotalPrice);
 
-        oAdapter = new ListAdapter() ;
+        oAdapter = new ListAdapter();
         m_oListView = (ListView) findViewById(R.id.main_list);
         m_oListView.setAdapter(oAdapter);
 
@@ -117,11 +121,6 @@ public class food_list extends AppCompatActivity {
             }
         });
 
-        // get Intent
-        Intent food = getIntent();
-        String resName = food.getStringExtra("가게이름");
-        String tag = food.getStringExtra("it_tag");
-
         int[] cnt = new int[8];
         for (int i = 0; i < 8; i++)
             cnt[i] = 0;
@@ -132,7 +131,7 @@ public class food_list extends AppCompatActivity {
                 try {
                     JSONArray jsonArray = new JSONArray(response);
                     foodCnt = jsonArray.length();
-                    for(int j=0; j<jsonArray.length(); j++) {
+                    for (int j = 0; j < jsonArray.length(); j++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(j);
                         String foodName = jsonObject.getString("foodName");
                         int price = jsonObject.getInt("price");
@@ -142,7 +141,7 @@ public class food_list extends AppCompatActivity {
                         oAdapter.addItem(foodName, "가격 : " + numberFormat.format(price));
                         adapter.notifyDataSetChanged();
                     }
-                } catch(JSONException e) {
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
@@ -168,8 +167,7 @@ public class food_list extends AppCompatActivity {
                 foodNum[position]++;
                 TotalPay = 0;
                 for (int n = 0; n < foodCnt; n++) {
-                    if (foodNum[n] != 0)
-                    {
+                    if (foodNum[n] != 0) {
                         data.add(foodList[n] + "  x  " + foodNum[n]);
                         TotalPay += foodPay[n] * foodNum[n];
                     }
@@ -187,19 +185,16 @@ public class food_list extends AppCompatActivity {
                 String[] array = spl.split("  x  ");
 
                 int n;
-                for(n = 0; n < foodList.length; n++)
-                {
+                for (n = 0; n < foodList.length; n++) {
                     boolean result = array[0].equals(foodList[n]);
-                    if(result == true)
-                    {
+                    if (result == true) {
                         foodNum[n]--;
                         TotalPay = TotalPay - foodPay[n] * 1;
-                        if(foodNum[n] == 0)
+                        if (foodNum[n] == 0)
                             data.remove(position);
                         else
                             data.set(position, array[0] + "  x  " + foodNum[n]);
                         numberFormat = new DecimalFormat("###,###");
-                        text.setPaintFlags(text.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
                         text.setText("가격 : " + numberFormat.format(TotalPay) + "원");
                         adapter.notifyDataSetChanged();
                     }
@@ -234,7 +229,38 @@ public class food_list extends AppCompatActivity {
                 orderView.putExtra("menu", menu);
                 orderView.putExtra("qrcode", qr);
                 orderView.putExtra("totalPrice", TotalPay);
+                orderView.putExtra("userID", userID);
                 orderView.putExtra("resName", resName);
+
+                long now = System.currentTimeMillis();
+                Date mdate = new Date(now);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm");
+                String date = sdf.format(mdate);
+
+                Log.i("주문내역1", userID);
+                Log.i("주문내역2", resName);
+                Log.i("주문내역3", menu);
+                Log.i("주문내역4", TotalPay + "");
+                Log.i("주문내역5", date);
+
+                Response.Listener<String> responseListener = new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try{
+                            JSONObject jsonObject = new JSONObject(response);
+                            boolean success = jsonObject.getBoolean("success");
+                            if(success)
+                                Toast.makeText(getApplicationContext(), "주문 내역 저장에 성공", Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+
+                OrderListRequest orderListRequest = new OrderListRequest(userID, resName, menu, TotalPay, date, responseListener);
+                RequestQueue queue = Volley.newRequestQueue(food_list.this);
+                queue.add(orderListRequest);
+
                 startActivity(orderView);
                 overridePendingTransition(R.anim.horizon_enter, R.anim.none);
                 finish();

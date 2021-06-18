@@ -150,6 +150,8 @@ public class My extends AppCompatActivity {
 
                     case R.id.order_detail:
                         Toast.makeText(getApplicationContext(), "order_detail click", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(), MyOrderList.class));
+                        overridePendingTransition(R.anim.horizon_enter, R.anim.horizon_exit);
                         break;
 
                     case R.id.cs:

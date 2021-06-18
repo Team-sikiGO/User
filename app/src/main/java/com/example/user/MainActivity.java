@@ -163,8 +163,13 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(getApplicationContext(), posterTitle[pos] + "click", Toast.LENGTH_LONG).show();
+
+                    Intent main = getIntent();
+                    String userID = main.getStringExtra("userID");
+
                     Intent maintores = new Intent(v.getContext(), restaurant.class);
                     maintores.putExtra("위치", pos);
+                    maintores.putExtra("userID", userID);
                     startActivity(maintores);
                     overridePendingTransition(R.anim.horizon_enter, R.anim.horizon_exit);
                 }

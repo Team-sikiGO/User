@@ -40,6 +40,7 @@ public class restaurant extends AppCompatActivity {
         final ListView reslist = (ListView) findViewById(R.id.res_list);
         Intent resfrommain = getIntent();
         int resID = resfrommain.getIntExtra("위치", 0);
+        String userID = resfrommain.getStringExtra("userID");
         Intent maintofood = new Intent(this, food_list.class);
 
         //Initialize And Assign Variable
@@ -116,6 +117,7 @@ public class restaurant extends AppCompatActivity {
                                                String name = (String) adapterView.getItemAtPosition(position);
                                                cnt[position]++;
                                                res_list.clear();
+                                               maintofood.putExtra("userID", userID);
                                                maintofood.putExtra("가게이름", name);
                                                startActivity(maintofood);
                                                overridePendingTransition(R.anim.horizon_enter, R.anim.horizon_exit);

@@ -1,15 +1,10 @@
 package com.example.user;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,66 +13,26 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-
-public class Order extends AppCompatActivity {
+public class MyOrderList extends AppCompatActivity {
     private Toolbar toolbar;
-    BottomNavigationView bottomNavigationView;
+    protected BottomNavigationView bottomNavigationView;
     private long backBtnTime = 0;
-    private Bitmap qr;
-    private ImageView img;
-    private TextView txt;
-    String menu;
-    int price;
-    String resName;
-    String userID;
-    NumberFormat numberFormat;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order);
+        setContentView(R.layout.activity_myorderlist);
 
         // toolbar setting
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
 
-        // QR code set to ImageView
-        Intent intent = getIntent();
-        qr = (Bitmap) intent.getParcelableExtra("qrcode");
-        menu = (String) intent.getStringExtra("menu");
-        userID = intent.getStringExtra("userID");
-        price = intent.getIntExtra("totalPrice", 1);
-        resName = intent.getStringExtra("resName");
-
-        TextView ResName = (TextView)findViewById(R.id.restaurant_name);
-        ResName.setText(resName);
-
-        numberFormat = new DecimalFormat("###,###");
-        TextView prc = (TextView)findViewById(R.id.price);
-        prc.setText("금액 : " + numberFormat.format(price) + "원");
-
-        txt = (TextView) findViewById(R.id.menu);
-        txt.setText(menu);
-
-        img = (ImageView) findViewById(R.id.qrcode);
-        img.setImageBitmap(qr);
-        img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), QRcode_popup.class);
-                intent.putExtra("qrcode", qr);
-                startActivity(intent);
-            }
-        });
-
         //Initialize And Assign Variable
         bottomNavigationView = findViewById(R.id.bottom_nav);
 
         //Set Home Selected
-        bottomNavigationView.setSelectedItemId(R.id.page_order);
+        bottomNavigationView.setSelectedItemId(R.id.page_my);
 
         //Perform ItemSelectedListener
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -97,12 +52,12 @@ public class Order extends AppCompatActivity {
                         return true;
 
                     case R.id.page_order:
+                        startActivity(new Intent(getApplicationContext(), Order.class));
+                        overridePendingTransition(R.anim.horizon_enter, R.anim.none);
+                        finish();
                         return true;
 
                     case R.id.page_my:
-                        startActivity(new Intent(getApplicationContext(), My.class));
-                        overridePendingTransition(R.anim.horizon_enter, R.anim.none);
-                        finish();
                         return true;
                 }
                 return true;
@@ -124,7 +79,7 @@ public class Order extends AppCompatActivity {
     }
 
     private void updateNavigationBarState() {
-        int actionId = R.id.page_order;
+        int actionId = R.id.page_my;
         selectBottomNavigationBarItem(actionId);
     }
 
@@ -135,15 +90,8 @@ public class Order extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        long curTime = System.currentTimeMillis();
-        long gapTime = curTime - backBtnTime;
-
-        if (0 <= gapTime && 2000 >= gapTime) {
-            super.onBackPressed();
-        } else {
-            backBtnTime = curTime;
-            Toast.makeText(this, "한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show();
-        }
+        finish();
+        overridePendingTransition(R.anim.none, R.anim.horizon_exit);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -157,10 +105,12 @@ public class Order extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logout:
-                Toast.makeText(getApplicationContext(), "Logout", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "로그아웃", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                overridePendingTransition(R.anim.horizon_enter, R.anim.none);
+                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

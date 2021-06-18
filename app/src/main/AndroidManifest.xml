@@ -28,7 +28,8 @@
         <activity android:name=".LoginActivity"/>
         <activity android:name=".RegisterActivity"/>
         <activity android:name=".food_list"/>
-        <activity android:name=".restaurant">
+        <activity android:name=".restaurant"/>
+        <activity android:name=".MyOrderList">
         </activity>
     </application>
 

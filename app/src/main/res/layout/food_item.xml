@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="80dp">
+    android:layout_height="50dp"
+    android:orientation="horizontal">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -14,22 +14,21 @@
             android:id="@+id/textTitle"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Food Name"
             android:layout_weight="70"
             android:gravity="center_vertical"
             android:paddingLeft="10dp"
-            android:textStyle="bold"
+            android:text="Food Name"
             android:textColor="#33aabb"
-            />
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/textDate"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Price"
             android:layout_weight="30"
             android:gravity="center_vertical|right"
             android:paddingRight="10dp"
-            />
+            android:text="Price" />
     </LinearLayout>
 
 </LinearLayout>
