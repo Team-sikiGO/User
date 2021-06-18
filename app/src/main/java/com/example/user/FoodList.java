@@ -56,7 +56,8 @@ public class FoodList extends AppCompatActivity {
         int foodPay[] = new int[100]; // 주문할 음식들의 가격
         String foodList[] = new String[100]; //주문 음식 리스트
         Intent food = getIntent();
-        userID = food.getStringExtra("userID");
+        Privacy privacy = (Privacy) getApplicationContext();
+        String userID = privacy.getID();
         String resName = food.getStringExtra("가게이름");
         resID = food.getIntExtra("resID", 0);
 
@@ -104,7 +105,7 @@ public class FoodList extends AppCompatActivity {
                         detail.putExtra("userID", userID);
                         startActivity(detail);
                         overridePendingTransition(R.anim.horizon_enter, R.anim.none);
-                        finish();
+//                        finish();
                         return true;
 
                     case R.id.page_my:

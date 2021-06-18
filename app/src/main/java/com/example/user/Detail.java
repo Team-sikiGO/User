@@ -107,13 +107,13 @@ public class Detail extends AppCompatActivity {
 
                             startActivity(orderView);
                             overridePendingTransition(R.anim.horizon_enter, R.anim.none);
-                            finish();
+//                            finish();
                         } catch(JSONException e) {
                             e.printStackTrace();
                         }
                     }
                 };
-                OrderDetailClick orderDetailClick = new OrderDetailClick(cDate, responseListener);
+                OrderDetailClick orderDetailClick = new OrderDetailClick(cDate, userID, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(Detail.this);
                 queue.add(orderDetailClick);
             }

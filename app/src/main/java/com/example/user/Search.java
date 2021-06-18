@@ -60,7 +60,7 @@ public class Search extends AppCompatActivity {
                         detail.putExtra("userID", userID);
                         startActivity(detail);
                         overridePendingTransition(R.anim.horizon_enter, R.anim.none);
-                        finish();
+//                        finish();
                         return true;
 
                     case R.id.page_my:

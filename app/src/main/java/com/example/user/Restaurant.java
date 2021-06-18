@@ -73,7 +73,7 @@ public class Restaurant extends AppCompatActivity {
                         detail.putExtra("userID", userID2);
                         startActivity(detail);
                         overridePendingTransition(R.anim.horizon_enter, R.anim.none);
-                        finish();
+//                        finish();
                         return true;
 
                     case R.id.page_my:

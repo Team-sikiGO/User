@@ -11,11 +11,12 @@ public class OrderDetailClick extends StringRequest {
     final static private String URL = "http://whdvm1.dothome.co.kr/OrderdetailClick.php";
     private Map<String, String> map;
 
-    public OrderDetailClick(String date, Response.Listener<String> listener) {
+    public OrderDetailClick(String date, String userID, Response.Listener<String> listener) {
         super(Method.POST, URL, listener, null);
 
         map = new HashMap<>();
         map.put("date", date);
+        map.put("userID", userID);
     }
 
     @Override
