@@ -159,7 +159,8 @@ public class food_list extends AppCompatActivity {
         m_oListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View v, int position, long id) {
-
+                btn.setEnabled(true);
+                btn.setVisibility(View.VISIBLE);
                 food_item item = (food_item) parent.getItemAtPosition(position);
                 String food = item.getFood_name();
                 String price = item.getPrice();

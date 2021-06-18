@@ -96,7 +96,9 @@
             android:layout_weight="1"
             android:textStyle="bold"
             android:textSize="20sp"
-            android:layout_marginBottom="20dp"></Button>
+            android:layout_marginBottom="20dp"
+            android:enabled="false"
+            android:visibility="invisible"></Button>
     </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
