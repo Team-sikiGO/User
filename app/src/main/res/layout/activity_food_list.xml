@@ -15,8 +15,8 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar"
-        android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
         android:background="@drawable/yellow_round"
         android:gravity="center"
         android:text="메뉴"
@@ -38,8 +38,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/main_list"
         android:layout_centerHorizontal="true"
-        android:layout_marginRight="40dp"
         android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
         android:background="@drawable/yellow_round"
         android:gravity="center"
         android:text="선택메뉴"
@@ -55,31 +55,48 @@
         android:layout_below="@+id/order_check"
         android:textAlignment="center"></ListView>
 
+    <ImageView
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/grey"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_below="@id/list01"></ImageView>
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/bottom_nav"
-        android:layout_below="@+id/list01"
-        android:gravity="center">
+        android:layout_below="@+id/line"
+        android:gravity="center"
+        android:orientation="vertical">
+
         <TextView
             android:id="@+id/TotalPrice"
-            android:layout_width="200dp"
-            android:layout_height="40dp"
-            android:layout_marginRight="50dp"
-            android:text="가격 : 0원"
-            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="center"
-            android:textSize="15sp"
-            android:background="@drawable/yellow_round"
-            android:textAlignment="center"></TextView>
+            android:text="가격 : 0원"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:textStyle="bold"></TextView>
+
 
         <Button
             android:id="@+id/createQR"
-            android:layout_width="100dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:background="@drawable/yellow_round"
             android:text="QR생성"
             android:textColor="@color/black"
-            android:background="@drawable/yellow_round"></Button>
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginBottom="20dp"></Button>
     </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

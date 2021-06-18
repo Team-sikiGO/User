@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -198,6 +199,7 @@ public class food_list extends AppCompatActivity {
                         else
                             data.set(position, array[0] + "  x  " + foodNum[n]);
                         numberFormat = new DecimalFormat("###,###");
+                        text.setPaintFlags(text.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
                         text.setText("가격 : " + numberFormat.format(TotalPay) + "원");
                         adapter.notifyDataSetChanged();
                     }
