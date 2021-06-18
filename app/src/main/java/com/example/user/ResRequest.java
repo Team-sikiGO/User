@@ -15,7 +15,7 @@ public class ResRequest extends StringRequest {
         super(Method.POST, URL, listener, null);
 
         map = new HashMap<>();
-        map.put("resID", resID +"");
+        map.put("resID", resID + "");
     }
 
     @Override

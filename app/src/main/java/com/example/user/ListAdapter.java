@@ -1,26 +1,23 @@
 package com.example.user;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class ListAdapter extends BaseAdapter
-{
-    private ArrayList<food_item> m_oData = new ArrayList<food_item>() ;
+public class ListAdapter extends BaseAdapter {
+    private ArrayList<FoodItem> m_oData = new ArrayList<FoodItem>();
 
     public ListAdapter() {
     }
 
     @Override
     public int getCount() {
-        return m_oData.size() ;
+        return m_oData.size();
     }
 
     @Override
@@ -33,10 +30,8 @@ public class ListAdapter extends BaseAdapter
             convertView = inflater.inflate(R.layout.food_item, parent, false);
         }
 
-        TextView titleTextView = (TextView) convertView.findViewById(R.id.textTitle) ;
-        TextView descTextView = (TextView) convertView.findViewById(R.id.textDate) ;
-
-        food_item listViewItem = m_oData.get(position);
+        TextView titleTextView = (TextView) convertView.findViewById(R.id.textTitle);
+        TextView descTextView = (TextView) convertView.findViewById(R.id.textDate);
 
         titleTextView.setText(m_oData.get(position).food_name);
         descTextView.setText(m_oData.get(position).price);
@@ -46,16 +41,16 @@ public class ListAdapter extends BaseAdapter
 
     @Override
     public long getItemId(int position) {
-        return position ;
+        return position;
     }
 
     @Override
     public Object getItem(int position) {
-        return m_oData.get(position) ;
+        return m_oData.get(position);
     }
 
     public void addItem(String title, String desc) {
-        food_item item = new food_item();
+        FoodItem item = new FoodItem();
 
         item.setFood_name(title);
         item.setPrice(desc);

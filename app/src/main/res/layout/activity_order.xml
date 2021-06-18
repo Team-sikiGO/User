@@ -20,17 +20,6 @@
         android:background="@drawable/receipt"
         android:orientation="vertical">
 
-<!--        <TextView-->
-<!--            android:id="@+id/order_text"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="50dp"-->
-<!--            android:text="주문내역"-->
-<!--            android:textAlignment="center"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:textSize="40sp"-->
-<!--            android:textStyle="bold"></TextView>-->
-
         <TextView
             android:id="@+id/restaurant_name"
             android:layout_width="match_parent"
@@ -38,10 +27,10 @@
             android:layout_marginTop="50dp"
             android:gravity="center"
             android:text="OOOO"
+            android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="40sp"
-            android:textStyle="bold"
-            android:textAlignment="center"></TextView>
+            android:textStyle="bold"></TextView>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,13 +46,13 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:background="@color/yellow"
             android:gravity="center"
             android:text="선택메뉴"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:background="@color/yellow"></TextView>
+            android:textStyle="bold"></TextView>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -75,20 +64,19 @@
             android:background="@color/black"></LinearLayout>
 
 
-
         <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="짜장면\n볶음밥\n탕수육"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="normal"
-                android:id="@+id/menu"></TextView>
+            android:id="@+id/menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="짜장면\n볶음밥\n탕수육"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="normal"></TextView>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -106,12 +94,12 @@
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:background="@color/yellow"
+            android:gravity="center"
             android:text="금액 : "
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:background="@color/yellow"
-            android:gravity="center"></TextView>
+            android:textStyle="bold"></TextView>
 
         <LinearLayout
             android:layout_width="match_parent"

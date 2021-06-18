@@ -52,11 +52,11 @@ public class Order extends AppCompatActivity {
         price = intent.getIntExtra("totalPrice", 1);
         resName = intent.getStringExtra("resName");
 
-        TextView ResName = (TextView)findViewById(R.id.restaurant_name);
+        TextView ResName = (TextView) findViewById(R.id.restaurant_name);
         ResName.setText(resName);
 
         numberFormat = new DecimalFormat("###,###");
-        TextView prc = (TextView)findViewById(R.id.price);
+        TextView prc = (TextView) findViewById(R.id.price);
         prc.setText("금액 : " + numberFormat.format(price) + "원");
 
         txt = (TextView) findViewById(R.id.menu);
@@ -157,7 +157,7 @@ public class Order extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logout:
-                Toast.makeText(getApplicationContext(), "Logout", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "로그아웃", Toast.LENGTH_LONG).show();
                 return true;
         }
         return super.onOptionsItemSelected(item);

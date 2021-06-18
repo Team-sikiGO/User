@@ -1,16 +1,13 @@
 package com.example.user;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,13 +16,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.user.My;
-import com.example.user.Order;
-import com.example.user.R;
-import com.example.user.Search;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -162,12 +154,10 @@ public class MainActivity extends AppCompatActivity {
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(getApplicationContext(), posterTitle[pos] + "click", Toast.LENGTH_LONG).show();
-
                     Intent main = getIntent();
                     String userID = main.getStringExtra("userID");
 
-                    Intent maintores = new Intent(v.getContext(), restaurant.class);
+                    Intent maintores = new Intent(v.getContext(), Restaurant.class);
                     maintores.putExtra("위치", pos);
                     maintores.putExtra("userID", userID);
                     startActivity(maintores);

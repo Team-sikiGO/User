@@ -1,4 +1,5 @@
 package com.example.user;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -45,10 +46,10 @@ public class RegisterActivity extends AppCompatActivity {
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        try{
+                        try {
                             JSONObject jsonObject = new JSONObject(response);
                             boolean success = jsonObject.getBoolean("success");
-                            if(success) { // 회원등록에 성공한 경우
+                            if (success) { // 회원등록에 성공한 경우
                                 Toast.makeText(getApplicationContext(), "회원 등록에 성공", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                 startActivity(intent);

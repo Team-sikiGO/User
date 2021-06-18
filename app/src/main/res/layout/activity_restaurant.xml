@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:orientation="horizontal"
-tools:context=".restaurant"
-android:background="@color/white">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="horizontal"
+    tools:context=".Restaurant">
 
-    <include  layout="@layout/toolbar_main"/>
+    <include layout="@layout/toolbar_main" />
 
     <TextView
         android:id="@+id/Restaurant"
@@ -17,8 +17,8 @@ android:background="@color/white">
         android:layout_below="@+id/toolbar"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
         android:layout_marginTop="10dp"
+        android:layout_marginRight="40dp"
         android:background="@drawable/yellow_round"
         android:gravity="center"
         android:text="가게목록"
@@ -31,16 +31,16 @@ android:background="@color/white">
         android:id="@+id/res_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/Restaurant"
-        android:layout_above="@+id/bottom_nav"></ListView>
+        android:layout_above="@+id/bottom_nav"
+        android:layout_below="@+id/Restaurant"></ListView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/bottom_nav"
-    app:itemBackground="@color/orange"
-    app:itemTextColor="@drawable/selector"
-    app:itemIconTint="@drawable/selector"
-    app:menu="@menu/bottom_navigation_menu"
-    android:layout_alignParentBottom="true"/>
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:itemBackground="@color/orange"
+        app:itemIconTint="@drawable/selector"
+        app:itemTextColor="@drawable/selector"
+        app:menu="@menu/bottom_navigation_menu" />
 </RelativeLayout>

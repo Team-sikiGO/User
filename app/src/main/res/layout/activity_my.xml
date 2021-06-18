@@ -13,31 +13,31 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_above="@+id/bottom_nav"
         android:layout_below="@+id/toolbar"
-        android:layout_above="@+id/bottom_nav">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="400dp"
             android:layout_gravity="center"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="10dp"
-            android:background="@drawable/yellow_round">
+            android:layout_weight="1"
+            android:background="@drawable/yellow_round"
+            android:orientation="horizontal">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile"
                 android:layout_width="300dp"
                 android:layout_height="300dp"
                 android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
                 android:layout_weight="1"
                 android:src="@drawable/my2"
                 app:civ_border_color="@color/black"
-                app:civ_border_width="2dp"
-                android:layout_marginLeft="20dp"/>
+                app:civ_border_width="2dp" />
 
             <TextView
                 android:id="@+id/name"
@@ -56,10 +56,10 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="3dp"
-            android:layout_marginTop="20dp"
-            android:background="@color/orange"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"></ImageView>
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="5dp"
+            android:background="@color/orange"></ImageView>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -80,11 +80,11 @@
                     android:layout_centerInParent="true"
                     android:layout_weight="1"
                     android:gravity="center"
+                    android:onClick="logout"
                     android:text="로그아웃"
                     android:textColor="@color/black"
                     android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:onClick="logout"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/notice"

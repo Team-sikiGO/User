@@ -14,12 +14,11 @@
         android:id="@+id/gridView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:numColumns="3"
+        android:layout_above="@+id/bottom_nav"
         android:layout_below="@+id/toolbar"
         android:layout_centerInParent="true"
-        android:layout_above="@+id/bottom_nav">
-    </GridView>
+        android:gravity="center"
+        android:numColumns="3"></GridView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"
@@ -29,5 +28,5 @@
         app:itemBackground="@color/orange"
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
-        app:menu="@menu/bottom_navigation_menu"/>
+        app:menu="@menu/bottom_navigation_menu" />
 </RelativeLayout>

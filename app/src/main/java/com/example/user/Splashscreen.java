@@ -17,8 +17,6 @@ public class Splashscreen extends Activity {
         Window window = getWindow();
         window.setFormat(PixelFormat.RGBA_8888);
     }
-
-
     Thread splashTread;
 
     @Override
@@ -42,14 +40,13 @@ public class Splashscreen extends Activity {
         iv.clearAnimation();
         iv.startAnimation(anim);
 
-
         splashTread = new Thread() {
             @Override
             public void run() {
                 try {
                     int waited = 0;
-                    // Splash screen pause time
-                    while (waited < 1500) {
+                    // Splash screen pause time(1500)
+                    while (waited < 3000) {
                         sleep(100);
                         waited += 100;
                     }

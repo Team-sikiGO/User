@@ -28,12 +28,12 @@ public class QRcode_popup extends Activity {
 
         //데이터 가져오기
         Intent intent = getIntent();
-        Bitmap qr = (Bitmap)intent.getParcelableExtra("qrcode");
+        Bitmap qr = (Bitmap) intent.getParcelableExtra("qrcode");
         img.setImageBitmap(qr);
     }
 
     //확인 버튼 클릭
-    public void mOnClose(View v){
+    public void mOnClose(View v) {
         //데이터 전달하기
         Intent intent = new Intent();
         intent.putExtra("result", "Close Popup");
@@ -46,7 +46,7 @@ public class QRcode_popup extends Activity {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         //바깥레이어 클릭시 안닫히게
-        if(event.getAction()==MotionEvent.ACTION_OUTSIDE){
+        if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
             return false;
         }
         return true;

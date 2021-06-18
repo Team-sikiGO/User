@@ -101,21 +101,12 @@ public class My extends AppCompatActivity {
         TextView textView_cs = (TextView) findViewById(R.id.cs);
         TextView textView_policy = (TextView) findViewById(R.id.policy);
 
-        Privacy privacy = (Privacy)getApplicationContext();
+        //이름, 전화번호 전역변수 사용
+        Privacy privacy = (Privacy) getApplicationContext();
         String Name = privacy.getName();
         String Number = privacy.getNumber();
         String str = Name + '\n' + '\n' + Number;
         textView_name.setText(str);
-        Log.i("name", Name);
-        Log.i("number", Number);
-
-//        Intent fromlogin = getIntent();
-//        String Name = fromlogin.getStringExtra("userName");
-//        String Num = fromlogin.getStringExtra("userNumber");
-//        Log.i("이름", Name);
-//        Log.i("번호", Num);
-//        String NameNum = Name + '\n' + '\n' + Num;
-//        textView_name.setText(NameNum);
 
         View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
@@ -126,7 +117,6 @@ public class My extends AppCompatActivity {
                         intent.setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                                 "image/*");
                         startActivityForResult(intent, GET_GALLERY_IMAGE);
-//                        Toast.makeText(getApplicationContext(), "profile click", Toast.LENGTH_SHORT).show();
                         break;
 
                     case R.id.name:

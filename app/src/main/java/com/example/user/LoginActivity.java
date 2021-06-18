@@ -52,18 +52,15 @@ public class LoginActivity extends AppCompatActivity {
                     Response.Listener<String> responseListener = new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
-                            try{
+                            try {
                                 JSONObject jsonObject = new JSONObject(response);
                                 boolean success = jsonObject.getBoolean("success");
-                                if(success) { // 로그인에 성공한 경우
+                                if (success) { // 로그인에 성공한 경우
                                     String userID = jsonObject.getString("userID");
                                     String userName = jsonObject.getString("userName");
                                     String userNumber = jsonObject.getString("userNumber");
 
-                                    Log.i("로그인", userName);
-                                    Log.i("로그인2", userNumber);
-
-                                    Privacy privacy = (Privacy)getApplicationContext();
+                                    Privacy privacy = (Privacy) getApplicationContext();
                                     privacy.setName(userName);
                                     privacy.setNumber(userNumber);
 
@@ -95,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                     } else {
                         et_pass.setText("");
                         et_id.setText("");
-                        Toast.makeText(getApplicationContext(), "PW를 입력해주세요", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "PWD를 입력해주세요", Toast.LENGTH_SHORT).show();
                     }
                 }
 
