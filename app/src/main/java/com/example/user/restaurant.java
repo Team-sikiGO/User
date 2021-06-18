@@ -153,8 +153,9 @@ public class restaurant extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        finish();
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
         overridePendingTransition(R.anim.horizon_enter, R.anim.horizon_exit);
+        finish();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

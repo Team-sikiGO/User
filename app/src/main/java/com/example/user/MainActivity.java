@@ -172,6 +172,7 @@ public class MainActivity extends AppCompatActivity {
                     maintores.putExtra("userID", userID);
                     startActivity(maintores);
                     overridePendingTransition(R.anim.horizon_enter, R.anim.horizon_exit);
+                    finish();
                 }
             });
             return imageView;
