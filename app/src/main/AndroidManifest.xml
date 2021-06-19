@@ -7,7 +7,7 @@
     <application
         android:name=".Privacy"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/sikigo_icon"
         android:label="sikiGo"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
