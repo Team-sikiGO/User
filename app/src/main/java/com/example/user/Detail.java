@@ -35,6 +35,7 @@ public class Detail extends AppCompatActivity {
     private long backBtnTime = 0;
     String clickDate[] = new String[100];
     String cDate;
+    String test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
