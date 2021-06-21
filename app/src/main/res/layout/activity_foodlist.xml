@@ -17,11 +17,11 @@
         android:layout_below="@+id/toolbar"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:background="@drawable/yellow_round"
+        android:background="@drawable/black_round"
         android:gravity="center"
         android:text="메뉴"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="25sp"
         android:textStyle="bold"></TextView>
 
@@ -40,11 +40,11 @@
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
-        android:background="@drawable/yellow_round"
+        android:background="@drawable/black_round"
         android:gravity="center"
         android:text="선택메뉴"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="25sp"
         android:textStyle="bold"></TextView>
 
@@ -92,7 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:layout_weight="0.6"
-            android:background="@drawable/yellow_round"
+            android:background="@drawable/black_round"
             android:enabled="false"
             android:text="QR생성"
             android:textColor="@color/black"
@@ -106,8 +106,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:itemBackground="@color/orange"
+        app:itemBackground="@color/white"
         app:itemIconTint="@drawable/selector"
         app:itemTextColor="@drawable/selector"
-        app:menu="@menu/bottom_navigation_menu" />
+        app:menu="@menu/bottom_navigation_menu"/>
 </RelativeLayout>

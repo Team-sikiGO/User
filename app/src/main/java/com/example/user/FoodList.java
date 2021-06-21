@@ -74,6 +74,7 @@ public class FoodList extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, data);
         list.setAdapter(adapter);
 
+
         oAdapter.notifyDataSetChanged();
         adapter.notifyDataSetChanged();
         //Initialize And Assign Variable

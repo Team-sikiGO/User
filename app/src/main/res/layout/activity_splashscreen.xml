@@ -4,7 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_gravity="center"
-    android:background="#FFAF00"
+    android:background="@color/black"
     android:gravity="center"
     android:orientation="vertical">
 
@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:layout_margin="15dp"
-        android:background="#FFAF00"
+        android:background="@color/black"
         android:gravity="center">
 
         <ImageView
@@ -21,7 +21,7 @@
             android:layout_width="500dp"
             android:layout_height="500dp"
             android:layout_gravity="center"
-            android:background="@drawable/splash3"
+            android:background="@drawable/splash4"
             android:gravity="center" />
 
         <LinearLayout
@@ -38,7 +38,7 @@
                 android:layout_marginBottom="10dp"
                 android:gravity="center"
                 android:text="Copyright(C) 2021.sikiGo.All rights reserved."
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="17dp" />
         </LinearLayout>
     </FrameLayout>

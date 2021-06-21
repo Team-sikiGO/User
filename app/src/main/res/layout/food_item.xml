@@ -18,7 +18,7 @@
             android:gravity="center_vertical"
             android:paddingLeft="10dp"
             android:text="Food Name"
-            android:textColor="#33aabb"
+            android:textColor="@color/black"
             android:textStyle="bold" />
 
         <TextView
