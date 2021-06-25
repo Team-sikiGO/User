@@ -31,7 +31,7 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".FoodList" />
-        <activity android:name=".Restaurant" />
+        <activity android:name=".RestaurantList" />
         <activity android:name=".Detail"></activity>
     </application>
 

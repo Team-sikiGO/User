@@ -106,7 +106,7 @@ public class FoodList extends AppCompatActivity {
                         detail.putExtra("userID", userID);
                         startActivity(detail);
                         overridePendingTransition(R.anim.horizon_enter, R.anim.none);
-//                        finish();
+                        finish();
                         return true;
 
                     case R.id.page_my:
@@ -283,7 +283,7 @@ public class FoodList extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(FoodList.this, Restaurant.class);
+        Intent intent = new Intent(FoodList.this, RestaurantList.class);
         intent.putExtra("userID", userID);
         intent.putExtra("위치", resID);
         startActivity(intent);

@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
                         detail.putExtra("userID", userID);
                         startActivity(detail);
                         overridePendingTransition(R.anim.horizon_enter, R.anim.none);
-//                        finish();
+                        finish();
                         return true;
 
                     case R.id.page_my:
@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent main = getIntent();
                     String userID = main.getStringExtra("userID");
 
-                    Intent maintores = new Intent(v.getContext(), Restaurant.class);
+                    Intent maintores = new Intent(v.getContext(), RestaurantList.class);
                     maintores.putExtra("위치", pos);
                     maintores.putExtra("userID", userID);
                     startActivity(maintores);

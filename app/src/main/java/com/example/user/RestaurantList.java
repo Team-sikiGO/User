@@ -26,7 +26,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Restaurant extends AppCompatActivity {
+public class RestaurantList extends AppCompatActivity {
     protected BottomNavigationView bottomNavigationView;
     private long backBtnTime = 0;
 
@@ -69,11 +69,11 @@ public class Restaurant extends AppCompatActivity {
                         return true;
 
                     case R.id.page_order:
-                        Intent detail = new Intent(Restaurant.this, Detail.class);
+                        Intent detail = new Intent(RestaurantList.this, Detail.class);
                         detail.putExtra("userID", userID2);
                         startActivity(detail);
                         overridePendingTransition(R.anim.horizon_enter, R.anim.none);
-//                        finish();
+                        finish();
                         return true;
 
                     case R.id.page_my:
@@ -111,7 +111,7 @@ public class Restaurant extends AppCompatActivity {
             }
         };
         ResRequest resRequest = new ResRequest(resID, responseListener);
-        RequestQueue queue = Volley.newRequestQueue(Restaurant.this);
+        RequestQueue queue = Volley.newRequestQueue(RestaurantList.this);
         queue.add(resRequest);
 
         reslist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
