@@ -59,8 +59,21 @@ public class Order extends AppCompatActivity {
         TextView prc = (TextView) findViewById(R.id.price);
         prc.setText("금액 : " + numberFormat.format(price) + "원");
 
+        String printMenu = "";
+        String[] arr = menu.split("/");
+        int size = arr.length;
+        for (int i = 0; i <= size / 2; i = i + 2) {
+            printMenu = printMenu.concat(arr[i]);
+            printMenu = printMenu.concat("\t\t\t· · · · ·\t\t\t");
+            printMenu = printMenu.concat(" X");
+            printMenu = printMenu.concat(arr[i+1]);
+            if(i != (size / 2)) {
+                printMenu = printMenu.concat("\n");
+            }
+        }
+
         txt = (TextView) findViewById(R.id.menu);
-        txt.setText(menu);
+        txt.setText(printMenu);
 
         img = (ImageView) findViewById(R.id.qrcode);
         img.setImageBitmap(qr);
