@@ -210,7 +210,7 @@ public class FoodList extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Bitmap qr;
-                String menu = "";
+                String menu = "SIKIGO/";
 
                 for (int i = 0; i < data.size(); i++) {
                     String str = data.get(i);

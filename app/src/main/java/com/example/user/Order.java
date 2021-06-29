@@ -60,6 +60,7 @@ public class Order extends AppCompatActivity {
         prc.setText("금액 : " + numberFormat.format(price) + "원");
 
         String printMenu = "";
+        menu = menu.substring(7);
         String[] arr = menu.split("/");
         int size = arr.length;
         for (int i = 0; i < size - 1; i = i + 2) {
