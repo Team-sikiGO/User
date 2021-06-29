@@ -62,12 +62,12 @@ public class Order extends AppCompatActivity {
         String printMenu = "";
         String[] arr = menu.split("/");
         int size = arr.length;
-        for (int i = 0; i <= size / 2; i = i + 2) {
+        for (int i = 0; i < size - 1; i = i + 2) {
             printMenu = printMenu.concat(arr[i]);
             printMenu = printMenu.concat("\t\t\t· · · · ·\t\t\t");
             printMenu = printMenu.concat(" X");
             printMenu = printMenu.concat(arr[i+1]);
-            if(i != (size / 2)) {
+            if(i != (size - 3)) {
                 printMenu = printMenu.concat("\n");
             }
         }
