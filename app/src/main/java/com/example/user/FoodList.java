@@ -211,19 +211,19 @@ public class FoodList extends AppCompatActivity {
             public void onClick(View view) {
                 Bitmap qr;
                 String menu = "";
+
                 for (int i = 0; i < data.size(); i++) {
                     String str = data.get(i);
                     String[] arr = str.split(" x ");
                     menu = menu.concat(arr[0]);
-                    menu = menu.concat("\t\t\t· · · · ·\t\t\t");
-                    menu = menu.concat(" X");
+                    menu = menu.concat("/");
                     menu = menu.concat(arr[1]);
-                    if (i == data.size() - 1) {
-                        break;
-                    } else {
-                        menu = menu.concat("\n");
+                    menu = menu.concat("/");
+                    if(i == (data.size() - 1)) {
+                        menu = menu.concat(Integer.toString(TotalPay));
                     }
                 }
+                menu = menu.replaceAll(" ","");
 
                 qr = generateQRCode(menu);
                 Intent orderView = new Intent(getApplicationContext(), Order.class);
